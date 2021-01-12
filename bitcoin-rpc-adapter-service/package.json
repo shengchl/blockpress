@@ -1,0 +1,23 @@
+{
+  "name": "bch-adapter",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "start": "node main.js"
+  },
+  "author": "BlockPress Inc. All rights reserved",
+  "license": "ISC",
+  "dependencies": {
+    "bitcoin": "^3.0.1",
+    "bitcoincashjs": "^0.1.10",
+    "bitcoinjs-lib": "file:bitcoinjs-lib",
+    "body-parser": "^1.18.2",
+    "bs58": "^4.0.1",
+    "buffer": "^5.1.0",
+    "bytebuffer": "^5.0.1",
+    "express": "^4.16.3",
+    "jayson": "file:jayson-master",
+    "json-rpc2": "^1.0.2"
+  }
+}

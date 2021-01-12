@@ -1,0 +1,55 @@
+
+div.card
+  div.card-body
+    div.card-title
+      h5 style="font-weight: bold;margin-bottom: 1em" Join BlockPress today.
+
+      p.text-muted
+        strong
+          | Please note:
+        =>
+        | Your username is only for login purposes and is not visible by anyone else.
+        =>
+        | Setting your name requires an on-chain BCH transaction to be publicly visible.
+    = form_for(:user, url: registration_path(:user), :html => {'role' => 'form'}) do |f|
+      = devise_error_messages!
+      div.form-group
+        = f.text_field :username, tabindex: 1, :class=>'form-control', :placeholder => 'Choose a username', :required => true
+
+      div.form-group
+        = f.password_field :password, autocomplete: 'off', tabindex: 2, :class=>'form-control', :placeholder => 'Set a password', :required => true
+
+
+      div.form-check
+        input.form-check-input.key_checkbox type="radio" name="key_check" id="key_check_new" value="key_check_new" checked="checked"
+        label.form-check-label for="key_check_new"
+          strong
+            | Create New WIF/Private Key (Key import coming in future)
+          =>
+          br
+          br
+          span.hide style="display: none"
+            | (Choose this if you are unsure)
+
+      div.form-check.hide style="display: none"
+        input.form-check-input.key_checkbox type="radio" name="key_check" id="key_check_import" value="key_check_import"
+        label.form-check-label for="key_check_import"
+          strong
+            | Import existing key (Uncompressed WIF key)
+        br
+        br
+      div.form-group.d-none id="private_key_input"
+        = f.text_field :wif, :class=>'form-control', :placeholder => 'Private key (WIF)'
+      = f.submit "Sign up", tabindex: 3, :class => "btn btn-block btn-primary"
+    br
+    p style="text-align: center; display: none"
+      small.text-muted
+        | By creating an account, you agree to the
+        =>
+        a href="/terms"
+          | User Agreement.
+    p style="text-align: center"
+      small.text-muted
+        | Already have an account?
+        =>
+        = link_to "Sign in", new_session_path(:user)

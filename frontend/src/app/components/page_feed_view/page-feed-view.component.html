@@ -1,0 +1,121 @@
+
+<div id="content-master-wrapper">
+    <app-standard-nav
+        [session]="session"
+        [currentUserProfile]="currentUserProfile"
+        (post)="openPublisher()"
+      >
+    </app-standard-nav>
+    <main id="main-content">
+        <div class="container parent feed">
+            <div class="row gutter-small">
+                <div class="d-none d-md-block col-xs-12 col-md-4 col-lg-3 side-container">
+                    <app-welcome-info *ngIf="!this.session || !this.session.userId">
+
+                    </app-welcome-info>
+                    <app-profile-preview
+                        [session]="session"
+                        [currentUserProfile]="currentUserProfile"
+                    ></app-profile-preview>
+                    <div class="wallet-preview-wrapper">
+                        <app-wallet-preview
+                            [session]="session"
+                            [currentUserProfile]="currentUserProfile"
+                        ></app-wallet-preview>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-8 col-lg-6 main-container">
+                    <app-publisher
+                        [publisherType]="'post'"
+                        [publishers]="publishers"
+                        [session]="session"
+                        [workingPost]="workingPost"
+                        [currentUserProfile]="currentUserProfile"
+                        [alertsList]="alertsList"
+                        (close)="closePublisher()"
+                        (update)="updateWorkingPost($event)"
+                    ></app-publisher>
+                    <div class="feed-menu">
+                        <a (click)="gotoFeed()" class="text-muted" [ngClass]="{'active': isNewest}">New</a>
+                        <a (click)="gotoTop()" class="text-muted" [ngClass]="{'active': isTop}">Top</a>
+                        <a *ngIf="userSignedIn()" class="text-muted" (click)="gotoNotifications()">
+                            Following
+                        </a>
+                        <a *ngIf="userSignedIn()" class="text-muted" (click)="gotoReplies()" [ngClass]="{'active': isReplies}">Replies
+                            <span *ngIf="hasBadgeCount" class="badge badge-success">{{badgeCount}}</span>
+                        </a>
+                    </div>
+                    <app-popular-feed-menu *ngIf="isTop"
+                        [feedType]="'posts'"
+                        [routerState]="routerState"
+                    >
+                    </app-popular-feed-menu>
+                    <app-post-stream
+                        [streamType]="streamType"
+                        [routerState]="routerState"
+                        [withHeader]="false"
+                        [session]="session"
+                        [currentPostOffsetId]="postsState.currentPostOffsetId"
+                        [posts]="posts"
+                        [workingPost]="workingPost"
+                        [workingPostReplies]="workingPostReplies"
+                        [profiles]="profiles"
+                        [currentUserProfile]="currentUserProfile"
+                        [alertsList]="alertsList"
+                        [openedTxLikeTips]="openedTxLikeTips"
+                    >
+                    </app-post-stream>
+                </div>
+                <div class="d-md-block col-xs-12 col-md-3 side-container">
+                    <div class="active-profile-wrapper">
+                        <div class="active-profile-cta">
+                            Recently Active <br/>
+                            <small>Share posts to show up here</small>
+                        </div>
+                        <div *ngFor="let p of profileSearch">
+                            <app-profile-mini-preview
+                                [profileMini]="p"
+                                [session]="session"
+                            ></app-profile-mini-preview>
+                        </div>
+                        <a (click)="gotoSearchProfiles()" class="goto-search-profiles">
+                            Browse all profiles
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <app-view-key-modal
+                [exportKeyInfo]="exportKeyInfo"
+                >
+            </app-view-key-modal>
+            <app-deposit-funds-modal
+                *ngIf="getIsFundingModalOpen"
+                [currentUserProfile]="currentUserProfile"
+                [session]="session"
+                [modalState]="modalState"
+                >
+            </app-deposit-funds-modal>
+        </div>
+    </main>
+    <div id="bottom-footer">
+      <app-footer-nav
+      [session]="session"
+      [currentUserProfile]="currentUserProfile"
+      (post)="openPublisher()"
+      ></app-footer-nav>
+    </div>
+</div>
+<app-post-modal
+    [publishers]="publishers"
+    [isModalOpen]="!!activeViewingPost"
+    [session]="session"
+    [post]="activeViewingPost"
+    [workingPostReplies]="workingPostReplies"
+    [profiles]="profiles"
+    [currentUserProfile]="currentUserProfile"
+    [workingPost]="workingPost"
+    [alertsList]="alertsList"
+    [openedTxLikeTips]="openedTxLikeTips"
+    (modalClosed)="closePostModal()"
+>
+</app-post-modal>

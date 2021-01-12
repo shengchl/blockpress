@@ -1,0 +1,14 @@
+
+<% if !Rails.env.development? %>
+
+
+<% else %>
+
+    <script type="text/javascript"> 
+
+    var mixpanel = {
+                    track: function(){}
+                    };
+    </script> 
+
+<% end %>

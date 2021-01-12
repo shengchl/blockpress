@@ -1,0 +1,41 @@
+<title><%= content_for?(:title) ? yield(:title) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.' %></title>
+<meta name="description" content="<%= content_for?(:description) ? yield(:description) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.' %>">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="BlockPress - Share your content and build your community. Earn Bitcoin Cash.">
+<meta name="twitter:site" content="@TheBlockPress">
+<meta name="twitter:title" content="<%= content_for?(:title) ? yield(:title) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.'  %>">
+<meta name="twitter:description" content="<%= content_for?(:description) ? yield(:description) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.' %>">
+<meta name="twitter:creator" content="@TheBlockPress">
+<!-- Twitter Summary card images must be at least 200x200px -->
+<meta name="twitter:image" content="<%= content_for?(:image_url) ? yield(:image_url) : get_base_url + '/apple-touch-icon-180x180.png' %>">
+<!-- Open Graph data -->
+<meta property="og:title" content="<%= content_for?(:og_title) ? yield(:og_title) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.' %>"/>
+<meta property="og:type" content="<%= content_for?(:og_type) ? yield(:og_type) : 'website' %>"/>
+
+<% if content_for?(:type) && yield(:type) == 'image' %>
+
+    <meta property="og:image" content="<%= content_for?(:image_url) ? yield(:image_url) : get_base_url + '/apple-touch-icon-180x180.png' %>" />
+    <!--<meta property="og:image_secure_url" content="<%= content_for?(:image_secure_url) ? yield(:image_secure_url) : get_base_url + '/apple-touch-icon-180x180.png' %>" />-->
+
+	<% if !content_for?(:image_mime_type).blank? %>
+		<meta property="og:image:type" content="<%= content_for?(:image_mime_type) ? yield(:image_mime_type) : '' %>" />
+	<% end %>
+
+	<meta property="og:image:width" content="<%= content_for?(:image_width) ? yield(:image_width) : '' %>" />
+	<meta property="og:image:height" content="<%= content_for?(:image_height) ? yield(:image_height) : '' %>" />
+
+	<meta property="og:url" content="<%= content_for?(:url) ? yield(:url) : 'http://www.blockpress.com' %>"/>
+
+<% else %>
+	<meta property="og:image" content="<%= content_for?(:image) ? yield(:image) : get_base_url + '/apple-touch-icon-180x180.png' %>"/>
+
+	<meta property="og:url" content="<%= content_for?(:url) ? yield(:url) : 'http://www.blockpress.com' %>"/>
+
+<% end %>
+
+
+<meta property="og:description" content="<%= content_for?(:description) ? yield(:description) : 'BlockPress - Share your content and build your community. Earn Bitcoin Cash.' %>"/>
+<meta property="og:site_name" content="BlockPress"/>
+<meta property="fb:admins" content="1"/>

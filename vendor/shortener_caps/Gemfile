@@ -1,0 +1,4 @@
+source "http://rubygems.org"
+
+# Specify any dependenci es in the gemspec
+gemspec

@@ -1,0 +1,33 @@
+<div class="title-header-area">
+    <h5>Communities</h5>
+</div>
+
+
+<div class="page-body">
+
+    <div *ngIf="userSignedIn()" class="create-community-section">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" (keydown)="updateNewCommunityName($event)"  (focusout)="updateNewCommunityName($event)" [value]="newCommunityName" (focus)="updateNewCommunityName($event)"  (keyup)="updateNewCommunityName($event)" placeholder="Create new community"/>
+            <div class="input-group-append">
+                <button (click)="gotoNewCommunity()" class="btn btn-outline-success">
+                    Create community
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div (click)="gotoCommunity(community.name)"  *ngFor="let community of communities" class="community-wrapper">
+        <a class="community-title-link">
+            {{community.name}}
+        </a>
+        <div class="community-info-section">
+            <small>Posts: {{community.posts}}</small>
+        </div>
+        <div class="community-info-section">
+            <small>Updated: {{formatDate(community.recentPostAt)}} ago</small>
+        </div>
+        <div class="community-image">
+
+        </div>
+    </div>
+</div>

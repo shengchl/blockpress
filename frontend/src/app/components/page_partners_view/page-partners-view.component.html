@@ -1,0 +1,89 @@
+
+<div id="content-master-wrapper">
+        <app-standard-nav
+            [session]="session"
+            [currentUserProfile]="currentUserProfile"
+          >
+        </app-standard-nav>
+        <main id="main-content">
+            <div class="container parent feed">
+                <div class="row gutter-small">
+                    <div class="d-none d-md-block col-xs-12 col-md-1 col-lg-1 side-container">
+                    </div>
+                    <div class="col-xs-12 col-md-10 col-lg-10 basic-container">
+                        <h2>Partners and Collaborations</h2>
+                        <div class="partner-section">
+                            <a href="https://blockchair.com/" rel="nofollow" target="_blank">
+                                <img src="https://s3-us-west-2.amazonaws.com/www.blockpress.com/assets/blockchair_logo.png" class="partner-logo"/>
+                            </a>
+                            <h3>Blockchair</h3>
+                            <p>
+                                <a href="https://blockchair.com/" target="_blank" rel="nofollow">Blockchair</a> is a blockchain search and analytics engine for
+                                <a href="https://blockchair.com/bitcoin" target="_blank" rel="nofollow">Bitcoin</a>, <a href="https://blockchair.com/bitcoin-cash" target="_blank" rel="nofollow">Bitcoin Cash</a>, and Ethereum or you can also say it's an engine that consists of blockchain explorers on steroids. You can filter and sort blocks, transactions, and their content by a variety of different criteria, as well as perform full-text search over the blockchains.
+                            </p>
+                        </div>
+                        <div class="partner-section">
+                            <a href="https://www.bitcoin.com" rel="nofollow" target="_blank">
+                                <img src="https://s3-us-west-2.amazonaws.com/www.blockpress.com/assets/bitcoin-explorer_logo.svg" class="partner-logo"/>
+                            </a>
+                            <h3>Bitcoin Explorer</h3>
+                            <p>
+                                <a href="https://www.bitcoin.com/" target="_blank" rel="nofollow">Bitcoin.com</a> is your premier source for everything Bitcoin related. We can help you buy bitcoins, choose a bitcoin wallet. You can also read the latest news, or engage with the community on our Bitcoin Forum. Please keep in mind that this is a commercial website that lists wallets, exchanges and other bitcoin related companies.
+                            </p>
+                        </div>
+                        <div class="partner-section">
+                            <a href="https://www.bitbox.earth/" rel="nofollow" target="_blank">
+                                <img src="https://s3-us-west-2.amazonaws.com/www.blockpress.com/assets/bitbox.png" class="partner-logo small"/>
+                            </a>
+                            <h3>BITBOX</h3>
+                            <p>
+                                <a href="https://www.bitbox.earth/" target="_blank" rel="nofollow">BITBOX</a> Bitcoin Cash Block Explorer by BITBOX. Your $BCH toolkit.
+                            </p>
+                        </div>
+                        <div class="partner-section">
+                            <a href="https://www.chainfeed.org" rel="nofollow" target="_blank">
+                                <img src="https://s3-us-west-2.amazonaws.com/www.blockpress.com/assets/chainfeed_logo.png" class="partner-logo small"/>
+                            </a>
+                            <h3>Chainfeed</h3>
+                            <p>
+                            <a href="https://www.chainfeed.org" target="_blank" rel="nofollow">Chainfeed</a> is a global LIVE newsfeed powered by Bitcoin Cash blockchain.
+
+                            In essence, chainfeed is a real-time log of all OP_RETURN transactions, delivered to you straight from the blockchain and rendered on-the-fly on the client side.
+
+                            The feed is a collection of "cards" that can be customized for each application protocol effortlessly, purely on the frontend.
+                            </p>
+                        </div>
+                        <div class="partner-section">
+                            <a href="https://github.com/unwriter/datacash" rel="nofollow" target="_blank">
+                                <img src="https://s3-us-west-2.amazonaws.com/www.blockpress.com/assets/datacash_logo.png" class="partner-logo small"/>
+                            </a>
+                            <h3>Datacash</h3>
+                            <p>
+                                <a href="https://github.com/unwriter/datacash" target="_blank" rel="nofollow">Datacash</a> is the simplest library for building and broadcasting Bitcoin Cash OP_RETURN transactions.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <app-view-key-modal
+                    [exportKeyInfo]="exportKeyInfo"
+                    >
+                </app-view-key-modal>
+                <app-deposit-funds-modal
+                    *ngIf="getIsFundingModalOpen"
+                    [currentUserProfile]="currentUserProfile"
+                    [session]="session"
+                    [modalState]="modalState"
+                    >
+                </app-deposit-funds-modal>
+            </div>
+        </main>
+        <div id="bottom-footer">
+          <app-footer-nav
+          [session]="session"
+          [currentUserProfile]="currentUserProfile"
+          ></app-footer-nav>
+        </div>
+    </div>

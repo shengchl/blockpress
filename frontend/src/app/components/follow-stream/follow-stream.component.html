@@ -1,0 +1,18 @@
+
+
+<div class="follower-stream">
+        <div class="row">
+            <div *ngFor="let profile of getProfiles" class="col-xs-12 col-md-4">
+
+                <app-follow-preview
+                    [session]="session"
+                    [profile]="profile"
+                >
+                </app-follow-preview>
+
+            </div>
+        </div>
+        <div *ngIf="!profiles.length" class="alert alert-secondary">
+            ...
+        </div>
+    </div>

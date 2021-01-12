@@ -1,0 +1,46 @@
+
+<div class="profile-preview-container">
+    <div class="card" *ngIf="userSignedIn()">
+        <a class="profile-banner-mini" (click)="gotoProfile()" [ngStyle]="hasActiveBackground && {'background-image': 'url(' + activeBackground + ')'}">
+            <div class="profile-mini-avatar-wrapper">
+                <img class="avatar-img medium" [src]="avatarImage"/>
+            </div>
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                <div class="profile-name">
+                    <a (click)="gotoProfile()">
+                        {{ profileName }}
+                    </a>
+                </div>
+            </h5>
+            <div class="card-text">
+                <div class="profile-address">
+                    <a (click)="gotoProfile()" [title]="profileIdentifier">
+                        {{ currentUserProfile.address_id }}
+                    </a>
+                </div>
+            </div>
+            <nav>
+                <ul class="nav-container">
+                    <li class="nav-item"
+                    (click)="gotoProfile()">
+                    <span class="nav-caption text-muted">Posts</span>
+                    <div class="nav-subcaption text-muted">{{currentUserProfile.posts}}</div>
+                    </li>
+                    <li class="nav-item"
+                    (click)="gotoProfile('following')">
+                    <span class="nav-caption text-muted">Following</span>
+                    <div class="nav-subcaption text-muted">{{currentUserProfile.following}}</div>
+                    </li>
+                    <li class="nav-item"
+                    (click)="gotoProfile('followers')">
+                    <span class="nav-caption text-muted">Followers</span>
+                    <div class="nav-subcaption text-muted">{{currentUserProfile.followers}}</div>
+                    </li>
+
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>

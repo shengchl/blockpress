@@ -1,0 +1,173 @@
+
+
+  <div class="container-fluid d-block d-md-none mobile-profile-details">
+    <div class="row mobile-profile-info" [ngClass]="{ 'confirm-photo-overlay': isConfirmPhoto }">
+      <div class="col-sm-12">
+        <div class="profile-name">
+          {{ activeProfileName | truncate:[20, '...'] }}
+        </div>
+        <div class="profile-action-section">
+            <button *ngIf="userSignedIn() && !isSelfUser && isCurrentUserFollowing && !isFollowMempool" (click)="unfollowUser()" class="btn btn-primary">Following</button>
+            <a [href]="followTx" target="_blank" *ngIf="!isSelfUser && isCurrentUserFollowing && isFollowMempool" class="btn btn-primary btn-disabled" title="Follow action is pending in the Mempool. Please wait until transaction is confirmed before changing following status.">
+                <i class="fa fa-clock-o"></i>
+                Following
+            </a>
+            <button *ngIf="userSignedIn() && !isSelfUser && !isCurrentUserFollowing && !isFollowMempool" (click)="followUser()" class="btn btn-secondary">Follow</button>
+            <a [href]="followTx" target="_blank" *ngIf="userSignedIn() && !isSelfUser && !isCurrentUserFollowing && isFollowMempool" class="btn btn-secondary btn-disabled" title="Unfollow action is pending in the Mempool. Please wait until transaction is confirmed before changing following status.">
+                <i class="fa fa-clock-o"></i>
+              Follow
+            </a>
+            <button (click)="startEditProfile()" *ngIf="isSelfUser && !isEditProfile" class="btn btn-primary">Edit profile</button>
+            <button (click)="closeEditProfile()" *ngIf="isSelfUser && isEditProfile && !isConfirmPhoto && !isConfirmAvatar && !isConfirmName" class="btn btn-secondary">Cancel profile changes</button>
+        </div>
+
+        <div class="mobile-edit-bar" *ngIf="isSelfUser">
+
+        </div>
+        <div class="profile-address text-muted">
+
+            <div *ngIf="isEditProfile && !isConfirmName && !isConfirmAvatar && !isConfirmPhoto">
+                <div *ngIf="isNameMempool" class="profile-name">
+                   <input disabled='disabled'  type="text" class="form-control" [value]="rawProfileName"/>
+                   <a [href]="nameTxLink" target="_blank" class="btn btn-success btn-disabled"title="Profile name change is pending in the Mempool. Please wait until transaction is confirmed before updating name again">
+                       Set name
+                    </a>
+                </div>
+                <div *ngIf="!isNameMempool" class="profile-name">
+                   <input (change)="updateProfileName($event)"  maxlength="72" type="text" class="form-control" [value]="rawProfileName"/>
+                   <button (click)="setProfileName()" class="btn btn-success">Set name</button>
+                </div>
+            </div>
+            <div class="profile-address" [title]="profileIdentifier" [ngClass]="{'confirm-photo-overlay': isEditingProfile}">
+                {{ activeProfileName }}
+            </div>
+
+            <div class="profile-earned" [title]="profileTips" [ngClass]="{'confirm-photo-overlay': isEditingProfile}" >
+                {{ profileTips }}
+            </div>
+        </div>
+        <div class="profile-bio">
+          <p>
+            {{ profileBio }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="tab-outer-wrapper" *ngIf="!isConfirmPhoto && !isConfirmAvatar && !isConfirmName">
+    <div class="container tab-wrapper">
+      <div class="row">
+        <div class="col-sm-3 d-none d-md-block">
+        </div>
+        <div class="col-sm-9">
+          <nav>
+            <ul class="nav-container">
+              <li class="nav-item active" *ngIf="!isEditProfile"
+                (click)="gotoTab('')"
+                [ngClass]="{'active': isTabActive(null)}">
+                <span class="nav-caption text-muted">Posts</span>
+                <div class="nav-subcaption text-muted">{{postsCount}}</div>
+              </li>
+              <li class="nav-item" *ngIf="!isEditProfile"
+                (click)="gotoTab('following')"
+                [ngClass]="{'active': isTabActive('following')}">
+                <span class="nav-caption text-muted">Following</span>
+                <div class="nav-subcaption text-muted">{{followingCount}}</div>
+              </li>
+              <li class="nav-item" *ngIf="!isEditProfile"
+                (click)="gotoTab('followers')"
+                [ngClass]="{'active': isTabActive('followers')}">
+                <span class="nav-caption text-muted">Followers</span>
+                <div class="nav-subcaption text-muted">{{followerCount}}</div>
+              </li>
+              <li class="nav-item" *ngIf="!isEditProfile"
+                (click)="gotoTab('likes')"
+                [ngClass]="{'active': isTabActive('likes')}">
+                <span class="nav-caption text-muted">Likes</span>
+                <div class="nav-subcaption text-muted">{{favsCount}}</div>
+              </li>
+              <li class="nav-item user-actions d-none d-md-block">
+                <button (click)="startEditProfile()" *ngIf="isSelfUser && !isEditProfile" class="btn btn-primary">Edit profile</button>
+                <button (click)="closeEditProfile()" *ngIf="isSelfUser && isEditProfile" class="btn btn-secondary">Cancel profile changes</button>
+                <button *ngIf="!isSelfUser && isCurrentUserFollowing && !isFollowMempool" (click)="unfollowUser()" class="btn btn-primary">
+                    <i *ngIf="followActionPerformed" class="fa fa-clock">
+                    </i>
+                      Following
+                </button>
+                <a [href]="followTx" target="_blank" *ngIf=" userSignedIn() &&  !isSelfUser && isCurrentUserFollowing && isFollowMempool" class="btn btn-primary btn-disabled" title="Follow action is pending in the Mempool. Please wait until transaction is confirmed before changing following status.">
+                    <i class="fa fa-clock-o"></i>
+                  Following
+                </a>
+                <button *ngIf="userSignedIn() && !isSelfUser && !isCurrentUserFollowing && !isFollowMempool" (click)="followUser()" class="btn btn-secondary">
+                     <i *ngIf="followActionPerformed" class="fa fa-clock-o">
+                      </i>
+                      Follow
+                    </button>
+                <a [href]="followTx" target="_blank" *ngIf="userSignedIn() && !isSelfUser && !isCurrentUserFollowing && isFollowMempool" class="btn btn-secondary btn-disabled" title="Unfollow action is pending in the Mempool. Please wait until transaction is confirmed before changing following status.">
+                    <i class="fa fa-clock-o"></i>
+                  Follow
+                </a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-outer-wrapper dark" *ngIf="isConfirmPhoto">
+    <div class="container tab-wrapper">
+      <div class="row">
+        <div class="col-sm-3  ">
+        </div>
+        <div class="col-sm-9">
+          <nav>
+            <ul class="nav-container">
+              <li class="nav-item user-actions  ">
+                <button (click)="cancelConfirmPhoto()" *ngIf="isSelfUser" class="btn btn-secondary">Cancel</button>
+                <button (click)="saveConfirmPhoto()" *ngIf="isSelfUser" class="btn btn-success">Save profile header</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-outer-wrapper dark" *ngIf="isConfirmAvatar">
+    <div class="container tab-wrapper">
+      <div class="row">
+        <div class="col-sm-3  ">
+        </div>
+        <div class="col-sm-9">
+          <nav>
+            <ul class="nav-container">
+              <li class="nav-item user-actions  ">
+                <button (click)="cancelConfirmAvatar()" *ngIf="isSelfUser" class="btn btn-secondary">Cancel</button>
+                <button (click)="saveConfirmAvatar()" *ngIf="isSelfUser" class="btn btn-success">Save profile photo</button>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-outer-wrapper dark" *ngIf="isConfirmName">
+      <div class="container tab-wrapper">
+        <div class="row">
+          <div class="col-sm-3  ">
+          </div>
+          <div class="col-sm-9">
+            <nav>
+              <ul class="nav-container">
+                <li class="nav-item user-actions  ">
+                  <button (click)="cancelConfirmName()" *ngIf="isSelfUser" class="btn btn-secondary">Cancel</button>
+                  <button (click)="saveConfirmName()" *ngIf="isSelfUser" class="btn btn-success">Save name</button>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>

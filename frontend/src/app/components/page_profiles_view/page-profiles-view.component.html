@@ -1,0 +1,46 @@
+
+<div id="content-master-wrapper">
+    <app-standard-nav
+        [session]="session"
+        [currentUserProfile]="currentUserProfile"
+        (post)="openPublisher()"
+      >
+    </app-standard-nav>
+    <main id="main-content">
+        <div class="container parent feed">
+            <div class="row gutter-small">
+                <div class="d-none d-md-block col-xs-12 col-md-4 col-lg-3 side-container">
+                </div>
+                <div class="col-xs-12 col-md-8 col-lg-6 main-container">
+                    <div class="title-header-area">
+                        <h5>Browse Completed Profiles</h5>
+                    </div>
+                    <div *ngFor="let p of profileSearch" class="top-profile-wrapper">
+                        <app-profile-full-preview
+                            [profileMini]="p"
+                            [session]="session"
+                        ></app-profile-full-preview>
+                    </div>
+                </div>
+            </div>
+            <app-view-key-modal
+                [exportKeyInfo]="exportKeyInfo"
+                >
+            </app-view-key-modal>
+            <app-deposit-funds-modal
+                *ngIf="getIsFundingModalOpen"
+                [currentUserProfile]="currentUserProfile"
+                [session]="session"
+                [modalState]="modalState"
+                >
+            </app-deposit-funds-modal>
+        </div>
+    </main>
+    <div id="bottom-footer">
+      <app-footer-nav
+      [session]="session"
+      [currentUserProfile]="currentUserProfile"
+      (post)="openPublisher()"
+      ></app-footer-nav>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+development:
+  general_bucket: bpdev
+  asset_host: false
+test:
+  general_bucket: bpdev
+  asset_host: false
+production:
+  general_bucket: bpprod
+  asset_host: http://i.blockpress.com

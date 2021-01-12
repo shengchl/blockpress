@@ -1,0 +1,35 @@
+development:
+  adapter: mysql2
+  host: 127.0.0.1
+  database: blockpress_development
+  port: 3306
+  username: root
+  password: yourpassword
+  pool: 5
+  encoding: utf8mb4
+  collation: utf8mb4_bin
+# Warning: The database defined as "test" will be erased and
+# re-generated from your development database when you run "rake".
+# Do not set this db to the same as development or production.
+test: &test
+  adapter: mysql2
+  host: 127.0.0.1
+  database: blockpress_test
+  port: 3306
+  username: root
+  password: yourpassword
+  pool: 5
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+production:
+  adapter: mysql2
+  host: blockpressmain-us-west-2c.817373nddjaa.us-west-2.rds.amazonaws.com
+  database: blockpress_production
+  port: 3306
+  username: root
+  password: passwordhere
+  pool: 5
+  encoding: utf8mb4
+  collation: utf8mb4_unicode_ci
+cucumber:
+  <<: *test

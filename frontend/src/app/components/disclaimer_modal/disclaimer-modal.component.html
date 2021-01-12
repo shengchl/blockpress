@@ -1,0 +1,22 @@
+<section class="modal-container" appModal>
+    <div class="container">
+        <div class="modal">
+            <header class="modal-section">
+                <h3>Disclaimer Modal</h3>
+                <a (click)="hideModal.emit()" class="exit text--no_decoratiogn"><span class="background-icon cancel-icon" aria-hidden="true"></span></a>
+            </header>
+            <section class="modal-section modal-section--with_border">
+
+                 Disclaimer
+            </section>
+
+            <section class="modal-section controls">
+                <button (click)="showPrevModal.emit()" class="btn btn-link btn-float-left">
+                    <i class="fa fa-chevron-left"></i>
+                    Back
+                </button>
+                <button (click)="showNextModal.emit()" class="btn btn-primary btn--normal btn-row-space--left">NEXT</button>
+            </section>
+        </div>
+    </div>
+</section>

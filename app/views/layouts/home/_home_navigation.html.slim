@@ -1,0 +1,29 @@
+div
+  nav.navbar.fixed-top.navbar-expand-md.navbar-light
+    a.navbar-brand href="/"
+      strong
+        | BlockPress
+
+    div.container.d-none.d-md-block
+      div.collapse.navbar-collapse id="navbarNavAltMarkup"
+        div.navbar-nav
+          = link_to 'general', subs_index_path('general'), class: 'nav-item nav-link d-md-none d-lg-block'
+          = link_to 'photos', subs_index_path('photos'), class: 'nav-item nav-link'
+          = link_to 'music', subs_index_path('music'), class: 'nav-item nav-link d-md-none d-lg-block'
+          = link_to 'art', subs_index_path('art'), class: 'nav-item nav-link'
+          = link_to 'fiction', subs_index_path('fiction'), class: 'nav-item nav-link d-md-none d-lg-block'
+          = link_to 'design', subs_index_path('design'), class: 'nav-item nav-link'
+          = link_to 'science', subs_index_path('science'), class: 'nav-item nav-link d-md-none d-lg-block'
+          = link_to 'crypto', subs_index_path('crypto'), class: 'nav-item nav-link'
+          = link_to 'nsfw', subs_index_path('nsfw'), class: 'nav-item nav-link d-md-none d-lg-block'
+          = link_to 'funny', subs_index_path('funny'), class: 'nav-item nav-link'
+        div.my-2
+          - if current_user.blank?
+            = link_to 'Sign in', new_user_session_path, class: 'btn btn-default navbar-btn'
+            =>
+            = link_to 'Sign up', new_user_registration_path, class: 'btn btn-primary navbar-btn btn-bch-green'
+          - else
+            = link_to 'Create Story', new_post_path, class: 'btn btn-secondary navbar-btn btn-bch-green'
+            = render(partial: 'layouts/util/nav_profile_dropdown', :locals => { user: current_user } )
+    span.d-block.d-sm-none style="cursor: pointer" onclick="openNav()"
+      | ☰

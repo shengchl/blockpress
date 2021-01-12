@@ -1,0 +1,130 @@
+
+<div class="post-container">
+    <div class="row post-row-margin">
+        <div class="post-wrapper col-12">
+            <div class="post-content-container" (click)="showPostModal($event)">
+                <div class="post-author-avatar">
+                    <div (click)="gotoProfile($event)" class="post-author-link" [title]="postAuthorName">
+                        <img [src]="postAvatarLink" class="avatar-img"/>
+                    </div>
+                </div>
+                <div class="post-content">
+                    <div class="post-author-header">
+                        <div class="post-author-details">
+                            <span class="post-author-link truncate-address" (click)="gotoProfile($event)" [title]="postAuthorName">
+                                    {{ postAuthorName | truncate:[20, '...'] }}
+                            </span>
+                            <a (click)="gotoProfile($event)" class="post-author-address text-muted truncate-address-short" [title]="postAuthorAddress">
+                                    {{ postAuthorAddress | truncate:[20, '...'] }}
+                                </a>
+                            <a (click)="stopProgation($event)" class="post-posted-at-link">
+                                <small class="text-muted">{{ postedAt }} ago</small>
+                            </a>
+                        </div>
+                        <div *ngIf="hasCommunity" (click)="gotoCommunity($event)" class="post-community-wrap">
+                            <a class="post-community-link">
+                                <small class="text-muted"> {{getCommunityName}}</small>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="post-body">
+                        <div *ngIf="isLike()" class="user-liked highlight-red div-inline">
+                            <i class="fa fa-heart">
+                            </i>
+                            Liked
+                        </div>
+                        <div *ngIf="isLike()" class="div-inline">
+                            <span *ngIf="tippedAmount && tippedAmount > 0" class="like-tip-text">
+                                and gifted
+                            </span>
+                            <span *ngIf="tippedAmount && tippedAmount > 0" class="like-tip-text-value">
+                                {{tippedAmount}} sats
+                            </span>
+                        </div>
+                        <div [innerHTML]="hashtaggedText | linky"></div>
+                        <div *ngIf="hasVideo()" class="video-player post-image-wrapper">
+                            <iframe width="100%" height="315" [src]="videoLink | safe" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                        <div *ngIf="!hasVideo() && hasImage()" class="post-image-wrapper">
+                            <img [src]="postImageLink"/>
+                        </div>
+                    </div>
+                    <div *ngIf="replyToPost" class="reply-to-post-wrapper">
+                        <div *ngIf="replyToPost" class="reply-to-post">
+                            <app-post
+                                [isReply]="true"
+                                [session]="session"
+                                [post]="post.replyToPost"
+                                [workingPostReplies]="workingPostReplies"
+                                [profiles]="profiles"
+                                [currentUserProfile]="currentUserProfile"
+                                [workingPost]="workingPost"
+                                [alertsList]="alertsList"
+                            >
+                            </app-post>
+                        </div>
+                    </div>
+                    <div class="post-actions" *ngIf="!hideActions && !isReply" (click)="stopProp($event)">
+                        <div class="post-actions-inner">
+                            <a *ngIf="isInsideModal" class="text-muted" [title]="repliesText">
+                                <i class="fa fa-comments-o"></i>
+                                <span>{{ repliesCount }}</span>
+                            </a>
+
+                            <a *ngIf="!isInsideModal" (click)="showPostModal($event)" class="text-muted"  [title]="repliesText">
+                                <i class="fa fa-comments-o"></i>
+                                <span>{{ repliesCount }}</span>
+                            </a>
+                            <a (click)="createLikeReply($event)" *ngIf="didCurrentUserLike" class="text-muted"  [ngClass]="{'user-liked highlight-red': (highlightActionIcon || isTipGivingOpen)}" [title]="alreadyLikedText">
+                                <i class="fa fa-heart"></i>
+                                <span>{{ likesCount }}</span>
+                            </a>
+                            <a (click)="createLikeReply($event, false)" *ngIf="!didCurrentUserLike" class="text-muted" [ngClass]="{'user-liked highlight-red': (highlightActionIcon || isTipGivingOpen)}" [title]="likesText">
+                                <i class="fa fa-heart"></i>
+                                <span>{{ likesCount }}</span>
+                            </a>
+                            <a class="text-muted" (click)="openTipGiving($event, true)" [title]="tipsText" [ngClass]="{'user-liked highlight-green': (highlightActionIcon || didCurrentUserLike || isTipGivingOpen)}">
+                                <i class="fa fa-gift"></i>
+                                <span>Gift</span>
+                            </a>
+                            <a class="text-muted" [title]="tipsText" *ngIf="tipsCount && tipsCount != '' && tipsCount > 0">
+                                <span>{{ tipsCount }}</span>
+                                <i class="fa fa-bitcoin bitcoin-count-number text-muted" *ngIf="tipsCount && tipsCount != '' && tipsCount > 0"></i>
+                            </a>
+
+                            <a (click)="toggleExplorer()" target="_blank"  class="text-muted explorer-link" title="View tx on Bitcoin Explorer">
+                                <i class="fa fa-chain"></i>
+                            </a>
+                            <div *ngIf="isShowExplorer" class="explorer-link">
+                                <a (click)="stopProgation($event)" class="blockchair-icon" [href]="blockchairLink()" target="_blank">Blockchair</a>
+                                <a (click)="stopProgation($event)" class="blockexplorer-icon" [href]="blockchainLink()" target="_blank">Block Explorer</a>
+                            </div>
+                        </div>
+
+                        <div>
+                            <app-alerts-messages
+                                [alerts]="alertsList"
+                                (deleteAlert)="deleteAlert($event)"
+                                [selectKey]="alertSelectKey"
+                            ></app-alerts-messages>
+                        </div>
+
+                        <div *ngIf="isTipGivingOpen" (click)="postReplyClicked($event)">
+                            <app-tip-giving
+                                [openedTxLikeTips]="openedTxLikeTips"
+                                [session]="session"
+                                [post]="post"
+                                [profiles]="profiles"
+                                [currentUserProfile]="currentUserProfile"
+                                [replyingToName]="postAuthorName"
+                                (close)="closeTipGiving($event)"
+                                [alertsList]="alertsList"
+                            >
+                            </app-tip-giving>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

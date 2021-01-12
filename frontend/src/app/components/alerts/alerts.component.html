@@ -1,0 +1,13 @@
+<div *ngFor="let alert of filterAlerts()" class="alert alert-dismissible" [ngClass]="getAlerClass(alert.type)" (click)="stopPropagation($event)">
+	<span>{{formatAlertMessage(alert.message)}}<a [href]="alert.link">{{alert.linkCaption}}</a></span>
+  <button
+    *ngIf="!alert.permanent"
+    type="button"
+    class="close"
+    data-dismiss="alert"
+    aria-label="Close"
+    (click)="deleteAlert.emit({id: alert.id, domSource: $event})"
+    >
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>

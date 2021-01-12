@@ -1,0 +1,117 @@
+
+<div id="content-master-wrapper">
+    <app-standard-nav
+        [session]="session"
+        [currentUserProfile]="currentUserProfile"
+        >
+    </app-standard-nav>
+    <main id="main-content">
+        <div class="container parent feed">
+            <div class="row gutter-small">
+                <div class="d-none d-md-block col-xs-12 col-md-4 col-lg-3 side-container">
+                    <app-profile-preview
+                        [session]="session"
+                        [currentUserProfile]="currentUserProfile"
+                    ></app-profile-preview>
+                    <div class="wallet-preview-wrapper">
+                        <app-wallet-preview
+                            [session]="session"
+                            [currentUserProfile]="currentUserProfile"
+                        ></app-wallet-preview>
+                    </div>
+                </div>
+                <div class="col-xs-12 col-md-8 col-lg-6 main-container">
+                    <div class="main-wrapper">
+                        <app-communities-view
+                            *ngIf="isCommunityListView"
+                            [communities]="communities"
+                            [session]="session"
+                        >
+                        </app-communities-view>
+                    </div>
+                    <div class="main-wrapper" *ngIf="!isCommunityListView">
+                        <div class="title-header-area">
+                            <h5>{{communityNameTitle}}</h5>
+                        </div>
+                        <app-publisher *ngIf="userSignedIn()"
+                            [publisherType]="'community'"
+                            [publisherTxId]="'community'"
+                            [publishers]="publishers"
+                            [session]="session"
+                            [workingPost]="workingPost"
+                            [currentUserProfile]="currentUserProfile"
+                            [alertsList]="alertsList"
+                            [postCommunityName]="this.communityName"
+                            (close)="closePublisher()"
+                            (update)="updateWorkingPost($event)"
+                        ></app-publisher>
+
+                        <app-post-stream
+                            [withHeader]="false"
+                            [session]="session"
+                            [posts]="posts"
+                            [workingPost]="workingPost"
+                            [workingPostReplies]="workingPostReplies"
+                            [profiles]="profiles"
+                            [currentUserProfile]="currentUserProfile"
+                            [alertsList]="alertsList"
+                            [openedTxLikeTips]="openedTxLikeTips"
+                            [streamType]="'community_posts'"
+                            [communityName]="this.communityName"
+                        >
+                        </app-post-stream>
+                    </div>
+                </div>
+                <div class="d-md-block col-xs-12 col-md-3 side-container">
+                    <div class="active-profile-wrapper">
+                        <div class="active-profile-cta">
+                            Recently Active <br/>
+                            <small>Share posts to show up here</small>
+                        </div>
+                        <div *ngFor="let p of profileSearch">
+                            <app-profile-mini-preview
+                                [profileMini]="p"
+                                [session]="session"
+                            ></app-profile-mini-preview>
+                        </div>
+                        <a (click)="gotoSearchProfiles()" class="goto-search-profiles">
+                            Browse all profiles
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div id="bottom-footer">
+        <app-footer-nav
+        [session]="session"
+        [currentUserProfile]="currentUserProfile"
+        ></app-footer-nav>
+    </div>
+</div>
+<app-view-key-modal
+[exportKeyInfo]="exportKeyInfo"
+>
+</app-view-key-modal>
+<app-deposit-funds-modal
+*ngIf="getIsFundingModalOpen"
+[currentUserProfile]="currentUserProfile"
+[session]="session"
+[modalState]="modalState"
+>
+</app-deposit-funds-modal>
+
+<app-post-modal
+    [publishers]="publishers"
+    [isModalOpen]="!!activeViewingPost"
+    [session]="session"
+    [post]="activeViewingPost"
+    [workingPostReplies]="workingPostReplies"
+    [profiles]="profiles"
+    [currentUserProfile]="currentUserProfile"
+    [workingPost]="workingPost"
+    [alertsList]="alertsList"
+    [openedTxLikeTips]="openedTxLikeTips"
+    (modalClosed)="closePostModal()"
+>
+</app-post-modal>

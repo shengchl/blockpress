@@ -1,0 +1,45 @@
+<div *ngIf="isTabActive(null)" [ngClass]="{'edit-overlay': isEditProfile}">
+    <app-post-stream
+        [withHeader]="false"
+        [session]="session"
+        [posts]="posts"
+        [workingPostReplies]="workingPostReplies"
+        [profiles]="profiles"
+        [currentUserProfile]="currentUserProfile"
+        [workingPost]="workingPost"
+        [alertsList]="alertsList"
+        [openedTxLikeTips]="openedTxLikeTips"
+    >
+    </app-post-stream>
+</div>
+
+<div *ngIf="isTabActive('followers')" [ngClass]="{'edit-overlay': isEditProfile}">
+    <app-follow-stream
+    [session]="session"
+    [profiles]="followers"
+    >
+    </app-follow-stream>
+</div>
+
+<div *ngIf="isTabActive('following')" [ngClass]="{'edit-overlay': isEditProfile}">
+    <app-follow-stream
+    [session]="session"
+    [profiles]="following"
+    >
+    </app-follow-stream>
+</div>
+
+<div *ngIf="isTabActive('likes')" [ngClass]="{'edit-overlay': isEditProfile}">
+    <app-post-stream
+        [withHeader]="false"
+        [session]="session"
+        [posts]="likes"
+        [workingPostReplies]="workingPostReplies"
+        [profiles]="profiles"
+        [currentUserProfile]="currentUserProfile"
+        [workingPost]="workingPost"
+        [alertsList]="alertsList"
+        [openedTxLikeTips]="openedTxLikeTips"
+    >
+    </app-post-stream>
+</div>

@@ -1,0 +1,69 @@
+
+<div #myModal class="modal fade" id="depositFundsModal" tabindex="-1" role="dialog" aria-labelledby="depositFundsModal" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">{{ modalTitle }}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <small class="text-muted">
+
+                    <div *ngIf="isPromptedAfterAttemptedAction">
+                        <p class="lead prompted-funding">
+                            Oops, but that action could not yet be performed.
+                        </p>
+                        <div class="sub-prompt-message">
+                            <p>
+                                Deposit a small amount of Bitcoin Cash (BCH). All data is stored on-chain and each action requires a fee to be paid to the miners (about 1/3rd of a cent).
+                            </p>
+                        </div>
+                    </div>
+                    <p>
+
+                     Deposit a small amount of funds to be able to perform actions in the Bitcoin Cash blockchain.
+                    <em>The cost of each transaction is less than 1/3rd of a USD cent</em> (about 250-300 satoshis) to pay the miners to put your transaction into a block.
+                    </p>
+                    <p>
+                    <strong>Please note: </strong>The dust limit is 546 satoshis and each transaction is kept as low as possible (about 220-280 cash/satoshis)
+                    </p>
+                </small>
+                <div  class="deposit-address-info">
+                    <div id="deposit-qr">
+                    </div>
+                    <div class="deposit-address">
+                        {{ currentUserProfile.address_id }}
+                    </div>
+                </div>
+                <div class="balance-info">
+                    <h4>Effective Balance: {{effectiveBalance}} sats</h4>
+                    <p>
+                        <small [ngClass]="{'green-balance': hasConfirmedBalance}">
+                            {{session.balances.confirmedBalance }} sats (confirmed on blockchain)
+                        </small>
+                    </p>
+                    <p *ngIf="hasUnconfirmed">
+                        <small [ngClass]="{'green-balance': hasUnconfirmed}">
+                            {{session.balances.unconfirmedBalance }} sats (unconfirmed)
+                        </small>
+                    </p>
+                    <p>
+                        <a [href]="getAccountLink" target="_blank">
+                            <small>View Account Balances on Blockchain</small>
+                        </a>
+                    </p>
+                    <p>
+                        <a (click)="exportPrivateKey()" href="#">
+                            <small>View/Export Private Key</small>
+                        </a>
+                    </p>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

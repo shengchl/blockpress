@@ -1,0 +1,574 @@
+
+<div id="content-master-wrapper">
+        <app-standard-nav
+            [session]="session"
+            [currentUserProfile]="currentUserProfile"
+          >
+        </app-standard-nav>
+        <main id="main-content">
+            <div class="container parent feed">
+                <div class="row gutter-small">
+                    <div class="d-none d-md-block col-xs-12 col-md-1 col-lg-1 side-container">
+                    </div>
+                    <div class="col-xs-12 col-md-10 col-lg-10 basic-container">
+                        <h2>BlockPress Protocol v1.3<small class="text-muted">May 10, 2018</small></h2>
+                        <small>Last change (1.3): Added Blog Post commands</small>
+                        <small>Last change (1.2): Added Create Media Post command</small>
+                        <p>
+                            The Protocol uses P2PKH addresses and all actions are stored on-chain with OP_RETURN and data in payloads are UTF-8 encoded.
+                        </p>
+                        <p>
+                            For example, the <em>Set Name Action (8d01)</em> will set your name to "nakamoto":
+                        </p>
+                        <p>
+                            OP_RETURN (HEX): 6a028d01086e616b616d6f746f
+                        </p>
+                        <p>
+                            Breaking it down: <br/><br/>
+
+                            <strong>6a</strong> = OP_RETURN<br/>
+                            <strong>02</strong> = PUSH Bytes (to make it easier for interpretors to process prefix)<br/>
+                            <strong>8d01</strong> = Set Name Action<br/>
+                            <strong>08</strong> = Length of bytes for first (and only parameter in this case)<br/>
+                            <strong>e616b616d6f746f</strong> = "nakamoto" encoded as UTF-8 bytes<br/>
+                        </p>
+                        <h3>Specification Summary</h3>
+                        <table class="table table-responsive table-codes">
+                            <tr>
+                                <th class="nowrap">Action</th>
+                                <th class="nowrap">Code</th>
+                                <th class="nowrap">Payload Parameters</th>
+                                <th class="nowrap">Details</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td>
+                                   Set Name
+                                </td>
+                                <td class="nowrap">
+                                    0x8d01
+                                </td>
+                                <td>
+                                    Text (77 Bytes)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/0309936b506fd9c4843d159c47fc5d2389899b78f564b3113ce0a59178b07e72">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/0309936b506fd9c4843d159c47fc5d2389899b78f564b3113ce0a59178b07e72">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Create Text Post
+                                </td>
+                                <td class="nowrap">
+                                    0x8d02
+                                </td>
+                                <td>
+                                    Text (77 Bytes)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/bebf90b2af4531b2875d96189b78371f516179d38ac74a33137f56b475911926">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/bebf90b2af4531b2875d96189b78371f516179d38ac74a33137f56b475911926">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Reply to posts (+ other replies!)
+                                </td>
+                                <td class="nowrap">
+                                    0x8d03
+                                </td>
+                                <td>
+                                    Txhash (32 bytes) - Replying to tx
+                                    <br/>
+                                    Text (45 bytes) - Reply body
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                 Like a Post (Optionally Tip Author)
+                                </td>
+                                <td class="nowrap">
+                                    0x8d04
+                                </td>
+                                <td>
+                                    Txhash (32 bytes) - Liking post tx
+                                    <br/>
+                                    Text (45 bytes) - Not used/ Reserved
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f44e49b0d98789b4cfa5f1ff6b683927dda6a572329113374c32d06d66fe2260">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f44e49b0d98789b4cfa5f1ff6b683927dda6a572329113374c32d06d66fe2260">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Follow Profile
+                                </td>
+                                <td class="nowrap">
+                                    0x8d06
+                                </td>
+                                <td>
+                                    Address (35 bytes) - Legacy Address (Coming soon: RIPEMD160 of pubkey)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f8a710a17e919bd9f9a053159153de084f0ad86a601b89c0ff374027eea315a5">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f8a710a17e919bd9f9a053159153de084f0ad86a601b89c0ff374027eea315a5">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Unfollow Profile
+                                </td>
+                                <td class="nowrap">
+                                    0x8d07
+                                </td>
+                                <td>
+                                    Address (35 bytes) - Legacy Address (Coming soon: RIPEMD160 of pubkey)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/988a7a41f1332b50a21dd0b734e81c13a90db324c3a19ae86910cf56aedf0da3">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/988a7a41f1332b50a21dd0b734e81c13a90db324c3a19ae86910cf56aedf0da3">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Set Profile Header
+                                </td>
+                                <td class="nowrap">
+                                    0x8d08
+                                </td>
+                                <td>
+                                    Header URL/IPFS Hash (77 bytes)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f1cc829d913abba9a01a25f2b8e9a30a9edabacb44fe184972118fb1bf1454f5">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f1cc829d913abba9a01a25f2b8e9a30a9edabacb44fe184972118fb1bf1454f5">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Create Media Post
+                                </td>
+                                <td class="nowrap">
+                                    0x8d09
+                                </td>
+                                <td>
+                                    <ul>
+                                        <li>Media Type Identifier (1 byte + 1 byte length) - Media Types (RESERVED = 0x00, IMAGE = 0x01, ... + future types) </li>
+                                        <li>Media Payload URL/IPFS Hash (Variable length + 1 byte length) - URL or IPFS hash, such as 'QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC' is 34 bytes when hex encoded. (Alternatively you may use a URL)</li>
+                                        <li>Text (Text post body ) (42 - Media URL/IPFS Hash) - Optional parameter.</li>
+                                    </ul>
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/fd435cbdb1ee70dbf729df87fa36dff1cb0ee875b4b63704f85c55141ef9bba2">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/fd435cbdb1ee70dbf729df87fa36dff1cb0ee875b4b63704f85c55141ef9bba2">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Set Profile Avatar
+                                </td>
+                                <td class="nowrap">
+                                    0x8d10
+                                </td>
+                                <td>
+                                    Avatar URL/IPFS Hash (77 bytes)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/7dae4479b8177442a7b29921cc457245637ff4399a622c749cd3932ed474eb46">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/7dae4479b8177442a7b29921cc457245637ff4399a622c749cd3932ed474eb46">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    Create Post in Community
+                                </td>
+                                <td class="nowrap">
+                                    0x8d11
+                                </td>
+                                <td>
+                                    Community name (Variable length bytes) - Longer the name, the shorter the message can be<br/>
+                                    Message (74 - Community name length)
+                                </td>
+                                <td>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/03ddff4aec0c448febf6bd8be64198a4a43e1fe8d5d4d36767fb62437b51edf8">
+                                        Blockchair
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                    <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/03ddff4aec0c448febf6bd8be64198a4a43e1fe8d5d4d36767fb62437b51edf8">
+                                        Block Explorer
+                                        <i class="fa fa-external-link"></i>
+                                    </a>
+                                </td>
+                            </tr>
+                        </table>
+
+                        <h3>Detailed Action Descriptions</h3>
+                        <h4 class="text-muted" id="set-name-action">Set Name</h4>
+                        <strong>Prefix:</strong> 0x8d01<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Text (77 bytes) - Profile name</li>
+                        </ul>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d01 086e616b616d6f746f<br/>
+                            Sets name to "nakamoto" <br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/0309936b506fd9c4843d159c47fc5d2389899b78f564b3113ce0a59178b07e72">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/0309936b506fd9c4843d159c47fc5d2389899b78f564b3113ce0a59178b07e72">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="create-post-action">Create Post</h4>
+                        <strong>Prefix:</strong> 0x8d02<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Text (77 bytes)</li>
+                        </ul>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX): 6a02 8d02 0c48656c6c6f20576f726c6421<br/>
+                            Creates a post with body "Hello World!" <br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/bebf90b2af4531b2875d96189b78371f516179d38ac74a33137f56b475911926">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/bebf90b2af4531b2875d96189b78371f516179d38ac74a33137f56b475911926">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+                        <p>
+                            Example with maximum (77 bytes) of data(<strong>Note the use of PUSHDATA1 4c with 4d (77) bytes following</strong>):<br/>
+                            OP_RETURN (HEX): 6a02 8d02 4c4d3132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637383930313233343536373839303132333435363738393031323334353637<br/>
+                            Creates a post with body "12345678901234567890123456789012345678901234567890123456789012345678901234567" <br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/0ea5a448dbcf9fc0b05622341dfc59b90419fc9b0c0d6865ecaaed9031f14d17">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/0ea5a448dbcf9fc0b05622341dfc59b90419fc9b0c0d6865ecaaed9031f14d17">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="reply-post-action">Reply to Post</h4>
+                        <strong>Prefix:</strong> 0x8d03<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Txhash (32 bytes) - Post being replied to</li>
+                            <li>Text (45 bytes) - Reply body</li>
+                        </ul>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX)  6a02 8d03 200ea5a448dbcf9fc0b05622341dfc59b90419fc9b0c0d6865ecaaed9031f14d172d546869732069732061206c6f6e67207265706c7920546869732069732061206c6f6e67207265706c7920313233<br/>
+                            Creates a reply to txhash 0ea5a448dbcf9fc0b05622341dfc59b90419fc9b0c0d6865ecaaed9031f14d17 with reply body "This is a long reply This is a long reply 123" <br/>
+
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="like-post-action">Like a Post (Optionally Tip Author)</h4>
+                        <strong>Prefix:</strong> 0x8d04<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Txhash (32 bytes) - Post being liked / gifted.</li>
+                            <li>Text (45 bytes) - (Unused currently)</li>
+                        </ul>
+                        <p>
+                            <strong>Important Note: </strong> Tipping is completely native by creating <em>an Output to the author's public address in the amount of the tip</em> . See sample below.
+                        </p>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX)  6a02 8d04 20829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f<br/>
+                            Creates a like for a post/reply (txhash: 829f421e381e4b84e4f1ac4ac121767eeb41d4280c555dc4cb1ae952307ee78f)<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f44e49b0d98789b4cfa5f1ff6b683927dda6a572329113374c32d06d66fe2260">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f44e49b0d98789b4cfa5f1ff6b683927dda6a572329113374c32d06d66fe2260">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <br/>
+                            <strong>Examples with a tip attached: </strong><br/>
+
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/9790abfb703b9b535e0ec98def3e51a3eec1a5a1f294b8bd75c99aee1a9c8d91">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/9790abfb703b9b535e0ec98def3e51a3eec1a5a1f294b8bd75c99aee1a9c8d91">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="follow-profile-action">Follow Profile</h4>
+                        <strong>Prefix:</strong> 0x8d06<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Address (35 bytes) - Legacy Address (Coming soon: RIPEMD160 of pubkey)</li>
+                        </ul>
+                        <p>
+                            <strong>Important Note: </strong> Use the Legacy address, not Cash Address format (done for flexibility reasons)
+                        </p>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d06 22313551464a6a4752726a4a764a6f53796666596735476232795674374b425979676b<br/>
+                            Follows a profile for address 15QFJjGRrjJvJoSyffYg5Gb2yVt7KBYygk<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f8a710a17e919bd9f9a053159153de084f0ad86a601b89c0ff374027eea315a5">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f8a710a17e919bd9f9a053159153de084f0ad86a601b89c0ff374027eea315a5">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+                        <h4 class="text-muted" id="unfollow-profile-action">Unfollow Profile</h4>
+                        <strong>Prefix:</strong> 0x8d07<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Address (35 bytes) - Legacy Address (Coming soon: RIPEMD160 of pubkey)</li>
+                        </ul>
+                        <p>
+                            <strong>Important Note: </strong> Use the Legacy address, not Cash Address format (done for flexibility reasons)
+                        </p>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d07 22313551464a6a4752726a4a764a6f53796666596735476232795674374b425979676b<br/>
+                            Unfollows a profile for address 15QFJjGRrjJvJoSyffYg5Gb2yVt7KBYygk<br/>
+
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/988a7a41f1332b50a21dd0b734e81c13a90db324c3a19ae86910cf56aedf0da3">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/988a7a41f1332b50a21dd0b734e81c13a90db324c3a19ae86910cf56aedf0da3">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Set Profile Header</h4>
+                        <strong>Prefix:</strong> 0x8d08<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Header URL (77 bytes) - Image file URL or IPFS hash ('QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC' in place of a URL)</li>
+                        </ul>
+
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d08 4568747470733a2f2f697066732e706963732f697066732f516d5861575246687536473679436379376466747369656859386f624a6d5831376852745a723742487943625a43<br/>
+                            Sets profile header to URL https://ipfs.pics/ipfs/QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC
+                            (In this case we used a proper URL, however simply 'QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC' is also acceptable to allow
+                            clients to choose their IPFS gateway of choice<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/f1cc829d913abba9a01a25f2b8e9a30a9edabacb44fe184972118fb1bf1454f5">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/f1cc829d913abba9a01a25f2b8e9a30a9edabacb44fe184972118fb1bf1454f5">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Create Media Post</h4>
+                        <strong>Prefix:</strong> 0x8d09<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Media Type Identifier (1 byte) - Media Types (RESERVED = 0x00, IMAGE = 0x01,+ others in future) </li>
+                            <li>Media URL/IPFS Hash (Variable length) - Media file URL. IPFS length is based on hash function. Standard hash example of 'QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC' is 34 bytes when hex encoded. (Alternatively you may use a URL)</li>
+                            <li>Text (caption for media) (73 - Media URL/IPFS Hash) - Optional parameter.</li>
+                        </ul>
+                        <p>
+                            Example 1 (with text caption): <br/>
+                            OP_RETURN (HEX) 6a02 8d09 01011668747470733a2f2f6269742e6c792f32465955726561304e65772023666561747572653a2023696d61676520706f737473206f6e20426c6f636b50726573732e20456e6a6f7921<br/>
+                            Sets media to URL https://bit.ly/2FYUrea with caption 'New #feature: #image posts on BlockPress. Enjoy!'.<br/>
+
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/fd435cbdb1ee70dbf729df87fa36dff1cb0ee875b4b63704f85c55141ef9bba2">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/fd435cbdb1ee70dbf729df87fa36dff1cb0ee875b4b63704f85c55141ef9bba2">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Set Profile Avatar</h4>
+                        <strong>Prefix:</strong> 0x8d10<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Avatar URL (77 bytes) - Image file URL or IPFS hash (Ex: 'QmXaWRFhu6G6yCcy7dftsiehY8obJmX17hRtZr7BHyCbZC')</li>
+                        </ul>
+
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d10 1f68747470733a2f2f692e696d6775722e636f6d2f4a306b5239506d2e6a7067<br/>
+                            Sets profile avatar to URL https://i.imgur.com/J0kR9Pm.jpg<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/7dae4479b8177442a7b29921cc457245637ff4399a622c749cd3932ed474eb46">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/7dae4479b8177442a7b29921cc457245637ff4399a622c749cd3932ed474eb46">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Create Post in Community</h4>
+                        <strong>Prefix:</strong> 0x8d11<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>Community name (Variable length bytes) - Longer the name, the shorter the message can be</li>
+                            <li>Message (74 - Community name length)</li>
+                        </ul>
+
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d11 0274762d4c6f73743a2054686520436f6d706c65746520436f6c6c656374696f6e202d20536561736f6e732031202d2036<br/>
+                            Post message 'Lost: The Complete Collection - Seasons 1 - 6' to community 'tv'<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/03ddff4aec0c448febf6bd8be64198a4a43e1fe8d5d4d36767fb62437b51edf8">
+                                Blockchair
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/03ddff4aec0c448febf6bd8be64198a4a43e1fe8d5d4d36767fb62437b51edf8">
+                                Block Explorer
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Create Blog (Coming soon)</h4>
+                        <strong>Prefix:</strong> 0x8d12<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>ChunkCount (1 byte + 1 length byte) - Total chunks for the Blog content</li>
+                            <li>Blog Title (Variable length)</li>
+                        </ul>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d12 TODO<br/>
+                            Create Blog titled 'Bitcoin Cash'<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/">
+                                Blockchair (tbd)
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/">
+                                Block Explorer (tbd)
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+
+                        <h4 class="text-muted" id="unfollow-profile-action">Create Blog (Coming soon)</h4>
+                        <strong>Prefix:</strong> 0x8d12<br/>
+                        <strong>Payload Parameters:</strong>
+                        <ul>
+                            <li>ChunkCount (1 byte + 1 length byte) - Total chunks for the Blog content</li>
+                            <li>Blog Title (Variable length)</li>
+                        </ul>
+                        <p>
+                            Example: <br/>
+                            OP_RETURN (HEX) 6a02 8d12 TODO<br/>
+                            Create Blog titled 'Bitcoin Cash'<br/>
+                            <a (click)="stopProp($event)" target="_blank" href="https://blockchair.com/bitcoin-cash/transaction/">
+                                Blockchair (tbd)
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                            <a (click)="stopProp($event)" target="_blank" href="https://explorer.bitcoin.com/bch/tx/">
+                                Block Explorer (tbd)
+                                <i class="fa fa-external-link"></i>
+                            </a>
+                        </p>
+                    </div>
+                </div>
+                <app-view-key-modal
+                    [exportKeyInfo]="exportKeyInfo"
+                    >
+                </app-view-key-modal>
+                <app-deposit-funds-modal
+                    *ngIf="getIsFundingModalOpen"
+                    [currentUserProfile]="currentUserProfile"
+                    [session]="session"
+                    [modalState]="modalState"
+                    >
+                </app-deposit-funds-modal>
+            </div>
+        </main>
+        <div id="bottom-footer">
+          <app-footer-nav
+          [session]="session"
+          [currentUserProfile]="currentUserProfile"
+          ></app-footer-nav>
+        </div>
+    </div>

@@ -1,0 +1,9 @@
+development:
+  cdn_base: https://abc.cloudfront.net
+  asset_base: na
+test:
+  cdn_base: https://abc.cloudfront.net
+  asset_base: na
+production:
+  cdn_base: https://abc.cloudfront.net
+  asset_base: abc.cloudfront.net

@@ -1,0 +1,26 @@
+
+<div class="profile-preview-container">
+    <div class="card">
+        <a class="profile-banner-mini" (click)="gotoProfile()" [ngStyle]="hasActiveBackground && {'background-image': 'url(' + activeBackground + ')'}">
+            <div class="profile-mini-avatar-wrapper">
+                <img class="avatar-img medium" [src]="avatarImage"/>
+            </div>
+        </a>
+        <div class="card-body">
+            <h5 class="card-title">
+                <div class="profile-name">
+                    <a (click)="gotoProfile()">
+                        {{ profileName }}
+                    </a>
+                </div>
+            </h5>
+            <div class="card-text">
+                <div class="profile-address">
+                    <a (click)="gotoProfile()" [title]="profileIdentifier">
+                        {{ profile.addressLegacy }}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

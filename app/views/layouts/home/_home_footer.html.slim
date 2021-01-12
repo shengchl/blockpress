@@ -1,0 +1,69 @@
+div.footer
+  div.container
+    div.row
+      div.col
+        ul.footer-links
+          li.footer-link-item
+            = link_to 'general', subs_index_path('general')
+          li.footer-link-item
+            = link_to 'bitcoin', subs_index_path('bitcoin')
+          li.footer-link-item
+            = link_to 'photos', subs_index_path('photos')
+          li.footer-link-item
+            = link_to 'music', subs_index_path('music')
+      div.col
+        ul.footer-links
+          li.footer-link-item
+            = link_to 'art', subs_index_path('art')
+          li.footer-link-item
+            = link_to 'fiction', subs_index_path('fiction')
+          li.footer-link-item
+            = link_to 'design', subs_index_path('design')
+          li.footer-link-item
+            = link_to 'science', subs_index_path('science')
+
+      div.col
+        ul.footer-links
+          li.footer-link-item
+            = link_to 'crypto', subs_index_path('crypto')
+          li.footer-link-item
+            = link_to 'news', subs_index_path('news')
+          li.footer-link-item
+            = link_to 'nsfw', subs_index_path('nsfw')
+          li.footer-link-item
+            = link_to 'funny', subs_index_path('funny')
+      div.col
+        h5
+          strong
+            | BlockPress
+        p style="margin-top: 20px"
+          | Have a question for us?
+          br
+          | We would love to hear from you.
+          br
+          a href="mailto:info@acceptcash.io"
+            | info@blockpress.com
+
+        p
+          a href="http://www.medium.com/@blockpress"
+            | Blog
+          =>
+          | &nbsp;
+          a href="http://twitter.com/TheBlockPress"
+            | Twitter
+
+  div
+    div.row.fine-print-section
+      div.col.text-center
+        div
+          | Use of this site constitutes acceptance of our <a href="/terms" class="text-muted">User Agreement</a>.  &copy; 2018 BlockPress Inc. All rights reserved.
+
+  div.text-center.d-none
+    img style="max-width: 200px" src=asset_path('bch_donation.png')
+    br
+    strong
+      | Donations are truly appreciated to help support our all-volunteer team.
+    div style="display:none"
+      br
+      | bitcoincash:qp8e2r9rgagm84z6qg282av6wxt9fv8x7u474cglqk
+      br

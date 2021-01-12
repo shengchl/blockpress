@@ -1,0 +1,6 @@
+development:
+  tld: api.blockpress.com
+test:
+  tld: api.blockpress.com
+production:
+  tld: api.blockpress.com

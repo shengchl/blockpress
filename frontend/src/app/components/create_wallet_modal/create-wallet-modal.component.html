@@ -1,0 +1,23 @@
+<section class="modal-container" appModal>
+    <div class="container">
+        <div class="modal">
+            <header class="modal-section">
+                <h3>Secure Your Account and Wallet</h3>
+                <a (click)="hideCreateWalletModal.emit()" class="exit text--no_decoratiogn"><span class="background-icon cancel-icon" aria-hidden="true"></span></a>
+            </header>
+            <section class="modal-section modal-section--with_border">
+
+                Let's set up your account so you can publish messages and accept payments on the Bitcoin Cash network. Here is what we are going to do next:
+
+                <i class="fa fa-id-card-o" aria-hidden="true"></i>
+
+                <h4>Backup recovery phrase</h4>
+                <h4>Verify recovery phrase</h4>
+            </section>
+
+            <section class="modal-section controls">
+                <button (click)="showNextModal.emit()" class="btn btn-primary btn--normal btn-row-space--left">NEXT</button>
+            </section>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,102 @@
+.post-wrapper
+    display: inline-block
+    // padding-left: 0px
+    // padding-right: 0px
+
+.post-content-container
+    // Not used yet
+
+.post-container
+    // margin-bottom: 1.25em
+
+@media (max-width: 576px)
+    .post-view
+        .modal-body
+            padding: 0.5em
+
+.post-published-at
+    display: inline-block
+    position: absolute
+    top: 20px
+    right: 40px
+
+.post-author-header
+    font-size: .8em
+    font-weight: bold
+    background-color: #fff
+    border: solid 1px #eee
+    border-radius-top: 4px
+    padding: 1em
+
+    .post-author-link
+        cursor: pointer
+        display: inline-block
+        &:hover
+            text-decoration: underline
+
+        max-width: 85%
+        white-space: nowrap
+        overflow: hidden
+        // text-overflow: ellipsis
+        font-weight: bold
+        font-size: 1.1em
+
+.post-title
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+    padding: 1em
+    background-color: #fff
+
+.post-image
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+
+
+.post-body
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+    padding: 1em
+
+.post-actions
+    font-size: 18px
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+    border-bottom: solid 1px #eee
+    padding-bottom: 1em
+    padding-left: 1em
+    background-color: #fff
+    a
+        display: inline-block
+        margin-right: 10px
+    span
+        font-size: 0.8em
+        display: inline-block
+        width: 25px
+        text-align: center
+
+a.user-liked
+    text-decoration: none
+
+    &:hover
+        text-decoration: none
+
+    i
+        color: #e0245e
+
+    span
+        color: #e0245e
+
+a.has-tips
+    text-decoration: none
+
+    &:hover
+        text-decoration: none
+
+    i
+        color: #28a745
+
+    span
+        color: #28a745
+
+.tip-giving-wrapper
+    background-color: #fff

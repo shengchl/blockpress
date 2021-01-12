@@ -1,0 +1,9 @@
+development:
+  access_key_id:  accesskey
+  secret_access_key: secret+uW59iiHrHmjs
+test:
+  access_key_id:  accesskey
+  secret_access_key: secret+uW59iiHrHmjs
+production:
+  access_key_id:  accesskey
+  secret_access_key: secret+uW59iiHrHmjs

@@ -1,0 +1,31 @@
+
+<div class="post-stream">
+    <div *ngIf="withHeader" class="notification-type-header">
+        <h5>All Notifications</h5>
+    </div>
+    <div *ngFor="let notification of getNotifications">
+
+        <app-post *ngIf="isMyPost(notification)"
+            [session]="session"
+            [post]="notification.entity"
+            [workingPostReplies]="workingPostReplies"
+            [profiles]="profiles"
+            [currentUserProfile]="currentUserProfile"
+            [workingPost]="workingPost"
+            [alertsList]="alertsList"
+            [openedTxLikeTips]="openedTxLikeTips"
+        >
+        </app-post>
+
+    </div>
+    <div  *ngIf="!this.getNotifications.length" class="alert alert-secondary">
+        ...
+        <br/>
+        <small class="text-muted">
+            This will be empty if you have not yet posted or followed anyone.
+        </small>
+    </div>
+    <div *ngIf="this.getNotifications.length" class="load-more">
+        <button (click)="loadMore()" class="btn btn-secondary btn-load-more">Load more...</button>
+    </div>
+</div>

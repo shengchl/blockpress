@@ -1,0 +1,18 @@
+
+<div class="profile-mini-preview-container">
+    <div class="profile-mini-avatar-wrapper">
+        <img class="avatar-img medium" [src]="avatarImage"/>
+    </div>
+    <div class="profile-details">
+        <div class="profile-name">
+            <a (click)="gotoProfile()">
+                {{ profileName }}
+            </a>
+        </div>
+        <div class="profile-address">
+            <a (click)="gotoProfile()" [title]="profileIdentifier" class="text-muted">
+                {{ profileIdentifier }}
+            </a>
+        </div>
+    </div>
+</div>

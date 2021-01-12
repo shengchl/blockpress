@@ -1,0 +1,142 @@
+.profile-header
+    background-color: #1da1f2
+    height: 320px
+    // background: url(https://pbs.twimg.com/media/DayCTcQU8AAIo56.jpg:large)
+    background-position: center center
+    background-repeat: no-repeat
+    background-size: cover
+    margin-top: 67px
+
+    .row
+        height: 320px
+
+    .profile-avatar-wrapper
+        width: 150px
+        height: 150px
+        position: absolute
+        bottom: -35px
+        .profile-avatar
+            width: 100%
+            border: solid 5px #fff
+            // background-position: center center
+            // background-repeat: no-repeat
+            border-radius: 50%
+            // background-size: cover
+
+        .profile-avatar-div
+            border: solid 5px #fff
+            background-position: center center
+            background-repeat: no-repeat
+            border-radius: 50%
+            background-size: cover
+            width: 150px
+            height: 150px
+
+
+    @media (max-width: 576px)
+        .profile-avatar-wrapper
+            bottom: -15px
+            width: 75px
+            height: 75px
+            .profile-avatar-div
+                border: solid 3px #fff
+                background-position: center center
+                background-repeat: no-repeat
+                border-radius: 50%
+                background-size: cover
+                width: 75px
+                height: 75px
+
+.edit-profile-header-overlay
+    background-color: rgba(0,0,0,.5)
+    position: relative
+    top: 0px
+    left: 0px
+    width: 100%
+    height: 100%
+
+.edit-profile-header-overlay-text
+    position: absolute
+    top: 0px
+    left: 0px
+    text-align: center
+    margin: auto
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    display: flex
+
+    div.upload-image
+        color: #fff
+        justify-content: center
+        align-self: center
+        text-align: center
+        width: 100%
+        h3
+            margin-top: 0px
+
+.edit-profile-avatar-overlay
+    background-color: rgba(0,0,0,.5)
+    position: relative
+    top: 0px
+    left: 0px
+    width: 100%
+    height: 100%
+    border: solid 6px #fff
+    border-radius: 50%
+    position: absolute
+    bottom: -45px
+
+.edit-profile-avatar-overlay-text
+    position: absolute
+    top: 0px
+    left: 0px
+    text-align: center
+    margin: auto
+    position: absolute
+    top: 0
+    left: 0
+    bottom: 0
+    right: 0
+    display: flex
+
+    div.upload-avatar-image
+        color: #fff
+        justify-content: center
+        align-self: center
+        text-align: center
+        width: 100%
+        h3
+            margin-top: 0px
+            font-size: 1em
+
+.fileUpload
+    position: relative
+    overflow: hidden
+    margin: 10px
+
+.fileUpload input.upload
+    position: absolute;
+    top: 0
+    right: 0
+    margin: 0
+    padding: 0
+    font-size: 20px
+    cursor: pointer
+    opacity: 0
+    filter: alpha(opacity=0);
+    width: 100%
+    height: 100%
+
+.url-header-input
+    max-width: 400px
+    margin: 0 auto
+    display: inline-block
+
+.url-avatar-input
+    min-width: 300px
+    max-width: 300px
+    margin: 0 auto
+    display: inline-block

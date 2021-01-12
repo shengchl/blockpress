@@ -1,0 +1,31 @@
+ # config/email.yml
+ development:
+   user_name: email
+   password: pass
+   domain: smtp.sendgrid.net
+   from_name: from
+   from_email: from@example.com
+   reply_to_email: from@example.com
+   service_email: from@example.com
+   address: blockpress.com
+   address_port: 587
+ test:
+    user_name: email
+    password: pass
+    domain: smtp.sendgrid.net
+    from_name: from
+    from_email: from@example.com
+    reply_to_email: from@example.com
+    service_email: from@example.com
+    address: blockpress.com
+    address_port: 1025
+ production:
+    user_name: email
+    password: pass
+    domain: smtp.sendgrid.net
+    from_name: from
+    from_email: from@example.com
+    reply_to_email: from@example.com
+    service_email: from@example.com
+    address: blockpress.com
+    address_port: 587

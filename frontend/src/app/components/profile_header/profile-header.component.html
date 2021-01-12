@@ -1,0 +1,63 @@
+
+<div class="profile-header" [ngClass]="{'edit-profile-header-overlay': !isConfirmPhoto && !isConfirmAvatar && !isConfirmName && isEditProfile}"
+    [ngStyle]="hasActiveBackground && {'background-image': 'url(' + activeBackground + ')'}">
+    <div class="edit-profile-header-overlay-text" *ngIf="!isConfirmPhoto && !isConfirmAvatar && !isConfirmName && isEditProfile">
+        <div class="upload-image">
+            <div *ngIf="false"(change)='selectFile($event)' class="fileUpload btn btn--small btn-secondary">
+                <i class="fa fa-2x fa-photo"></i>
+                <h3>Change your header photo</h3>
+                <input id="attachmentUpload" type="file" class="upload" name="fileInput" value=""/>
+            </div>
+            <div>
+                <i class="fa fa-2x fa-photo"></i>
+                <h3>Change your header photo (Make sure to use jpg/png/gif link shorter than 77 characters</h3>
+                <div *ngIf="isHeaderMempool">
+                    URL:<input (change)='selectHeaderUrl($event)' disabled='disabled' id="imageUrl" type="text" class="form-control url-header-input" [value]="headerMempoolUrl"/>
+                    <a [href]="headerTxLink" target="_blank" class="btn btn-success btn-disabled" title="Profile header change is pending in the Mempool. Please wait until transaction is confirmed before updating header again">
+                        Set Header URL
+                    </a>
+                </div>
+                <div *ngIf="!isHeaderMempool">
+                    URL:<input (change)='selectHeaderUrl($event)' id="imageUrl" type="text" class="form-control url-header-input"/>
+                    <button (click)='setHeaderUrl()' class="btn btn-success">Set Header URL</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container" >
+        <div class="row">
+            <div class="col-2">
+                <div class="avatar-wrapper">
+                    <div class="profile-avatar-wrapper" *ngIf="!isConfirmPhoto && !isConfirmName">
+                        <div class="edit-profile-avatar-overlay-text" *ngIf="!isConfirmPhoto && !isConfirmAvatar && !isConfirmName &&  isEditProfile">
+                            <div class="upload-avatar-image" *ngIf="false">
+                                <div (change)='selectAvatarFile($event)' class="fileUpload btn btn--small btn-secondary">
+                                    <i class="fa fa-2x fa-photo"></i>
+                                    <h3>Change photo</h3>
+                                    <input id="attachmentAvatarUpload"  maxlength="72" type="file" class="upload" name="fileInput" value=""/>
+                                </div>
+                            </div>
+                            <div *ngIf="isAvatarMempool">
+                                <div class="upload-avatar-image">
+                                    <i class="fa fa-2x fa-photo"></i>
+                                    <input (change)='selectAvatarUrl($event)' maxlength="72" disabled="disabled" id="imageAvatarUrl" type="text" class="form-control url-avatar-input" [value]="avatarMempoolUrl"/>
+                                    <a [href]="avatarTxLink" target="_blank" class="btn btn-success btn-disabled" title="Profile photo change is pending in the Mempool. Please wait until transaction is confirmed before updating photo again">
+                                        Set Photo URL
+                                    </a>
+                                </div>
+                            </div>
+                            <div *ngIf="!isAvatarMempool">
+                                <div class="upload-avatar-image">
+                                    <i class="fa fa-2x fa-photo"></i>
+                                    <input (change)='selectAvatarUrl($event)' id="imageAvatarUrl" type="text" class="form-control url-avatar-input" value=""/>
+                                    <button (click)='setAvatarUrl()' class="btn btn-success">Set Photo URL</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div *ngIf="true" class="profile-avatar-div" [ngStyle]="{'background-image': 'url(' + activeAvatar + ')'}"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

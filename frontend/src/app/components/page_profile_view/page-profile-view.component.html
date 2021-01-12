@@ -1,0 +1,110 @@
+
+<div id="content-master-wrapper">
+  <app-standard-nav
+      [session]="session"
+      [currentUserProfile]="currentUserProfile"
+      (post)="openPublisher()"
+    >
+  </app-standard-nav>
+
+  <main id="main-content">
+
+      <app-profile-header
+      [session]="session"
+      [profiles]="profiles"
+      [viewingUserProfileAddressLegacy]="profileId"
+      [isEditProfile]="isEditProfile"
+      [isConfirmPhoto]="isConfirmPhoto"
+      [confirmPhotoTarget]="confirmPhotoTarget"
+      [isConfirmAvatar]="isConfirmAvatar"
+      [confirmAvatarTarget]="confirmAvatarTarget"
+      [isConfirmName]="isConfirmName"
+      ></app-profile-header>
+
+      <app-navigation-tabs
+        [followers]="followers"
+        [profilePageId]="profilePageId"
+        [profileId]="profileId"
+        [profiles]="profiles"
+        [viewingUserProfileAddressLegacy]="profileId"
+        [session]="session"
+        [isEditProfile]="isEditProfile"
+        [isConfirmPhoto]="isConfirmPhoto"
+        [confirmPhotoTarget]="confirmPhotoTarget"
+        [isConfirmAvatar]="isConfirmAvatar"
+        [confirmAvatarTarget]="confirmAvatarTarget"
+        [isConfirmName]="isConfirmName"
+        [confirmNameTarget]="confirmNameTarget"
+      ></app-navigation-tabs>
+
+      <div class="container" style="margin-top: 20px">
+        <div class="row">
+            <div class="col-md-3 d-none d-md-block">
+              <app-profile-sidebar
+                [session]="session"
+                [profiles]="profiles"
+                [viewingUserProfileAddressLegacy]="profileId"
+                [isEditProfile]="isEditProfile"
+                [isConfirmPhoto]="isConfirmPhoto"
+                [isConfirmAvatar]="isConfirmAvatar"
+                [isConfirmName]="isConfirmName"
+                [confirmNameTarget]="confirmNameTarget"
+              >
+              </app-profile-sidebar>
+            </div>
+            <div class="col-sm-12 col-md-9">
+              <app-profile-page-tab
+                [profilePageId]="profilePageId"
+                [session]="session"
+                [posts]="profilePosts"
+                [openedTxLikeTips]="openedTxLikeTips"
+                [workingPostReplies]="workingPostReplies"
+                [profiles]="profiles"
+                [followers]="followers"
+                [following]="following"
+                [likes]="likes"
+                [viewingUserProfileAddressLegacy]="profileId"
+                [currentUserProfile]="currentUserProfile"
+                [isEditProfile]="isEditProfile"
+                [workingPost]="workingPost"
+                [alertsList]="alertsList"
+              >
+              </app-profile-page-tab>
+            </div>
+        </div>
+      </div>
+  </main>
+  <div id="bottom-footer">
+    <app-footer-nav
+    [session]="session"
+    [currentUserProfile]="currentUserProfile"
+    (post)="openPublisher()"
+    ></app-footer-nav>
+  </div>
+</div>
+<app-view-key-modal
+[exportKeyInfo]="exportKeyInfo"
+>
+</app-view-key-modal>
+<app-deposit-funds-modal
+*ngIf="getIsFundingModalOpen"
+[currentUserProfile]="currentUserProfile"
+[session]="session"
+[modalState]="modalState"
+>
+</app-deposit-funds-modal>
+<app-post-modal
+  [publishers]="publishers"
+  [directlyNavigatedToPost]="directlyNavigatedToPost"
+  [isModalOpen]="!!activeViewingPost"
+  [session]="session"
+  [post]="activeViewingPost"
+  [workingPostReplies]="workingPostReplies"
+  [profiles]="profiles"
+  [currentUserProfile]="currentUserProfile"
+  [workingPost]="workingPost"
+  [alertsList]="alertsList"
+  (modalClosed)="closePostModal()"
+  [openedTxLikeTips]="openedTxLikeTips"
+  >
+</app-post-modal>

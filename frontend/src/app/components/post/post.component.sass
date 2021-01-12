@@ -1,0 +1,201 @@
+@import 'variables.sass'
+.post-wrapper
+    display: inline-block
+    // padding-left: 0px
+    // padding-right: 0px
+
+.post-content-container
+    display: flex
+    padding: 10px
+    background-color: #fff
+    border-bottom: solid 1px #eee
+    cursor: pointer
+
+    &:hover
+        background-color: #f5f8fa
+
+        .post-content-container
+            background-color: #f5f8fa
+
+.post-author-avatar
+
+.post-content
+    width: 100%
+
+.post-container
+    // margin-bottom: 1.25em
+
+.post-posted-at-link
+
+.reply-to-post-wrapper
+    padding-top: 20px
+
+.reply-to-post
+    border-left: solid 3px #eee
+    padding-left: 10px
+    &:hover
+        border-left: solid 3px green
+    border-top: solid 1px #eee
+    border-right: solid 1px #eee
+
+.post-published-at
+    display: inline-block
+    position: absolute
+    top: 20px
+    right: 40px
+
+.post-author-header
+    font-size: .8em
+    font-weight: bold
+    border-radius-top: 4px
+
+.post-author-address
+    font-weight: normal
+    display: inline-block
+    font-size: 1em
+
+
+.post-community-wrap
+    margin-top: -5px
+
+a.post-community-link
+    cursor: pointer
+    &:hover
+        text-decoration: underline
+    display: inline-block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: normal;
+    font-size: 1em;
+
+.post-image-wrapper
+    img
+        max-width: 100%
+        max-height: 100%
+        width: 100%
+    overflow: hidden
+    max-height: 600px
+    padding-right: 10px
+
+.post-image-warning
+    text-align: center
+
+.post-author-link
+    cursor: pointer
+    display: inline-block
+    &:hover
+        text-decoration: underline
+
+    max-width: 85%
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    font-weight: bold
+    font-size: 1em
+
+.post-posted-at-link
+    cursor: pointer
+    display: inline-block
+
+    &:hover
+        text-decoration: underline
+
+    max-width: 85%
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+    font-weight: normal
+    font-size: 1em
+
+.post-title
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+    padding: 1em
+
+.post-image
+    border-left: solid 1px #eee
+    border-right: solid 1px #eee
+
+
+.post-row-margin
+
+
+.like-tip-text
+
+.div-inline
+    display: inline-block
+
+.like-tip-text-value
+    color: $active-dark-green
+    font-weight: 400
+
+.post-body
+    white-space: normal
+    word-break: break-word
+.post-actions
+    padding-top: 10px
+    i
+        font-size: 18px
+    a
+        display: inline-block
+        margin-right: 10px
+    i
+        font-size: 17px
+    span
+        font-size: 0.8em
+        display: inline-block
+        min-width: 25px
+        text-align: center
+        font-size: 15px
+
+.post-actions
+    .explorer-link
+        float: right
+        font-size: 0.7em
+        position: relative
+        top: 7px
+
+i.bitcoin-count-number
+    font-size: 0.5em !important
+
+.post-actions-inner
+
+.user-liked.highlight-red
+    text-decoration: none
+
+    &:hover
+        text-decoration: none
+
+    i
+        color: #e0245e
+
+    span
+        color: #e0245e
+
+.user-liked.highlight-green
+    text-decoration: none
+
+    &:hover
+        text-decoration: none
+
+    i
+        color: $active-dark-green
+
+    span
+        color: $active-dark-green
+
+a.has-tips
+    text-decoration: none
+
+    &:hover
+        text-decoration: none
+
+    i
+        color: #28a745
+
+    span
+        color: #28a745
+
+.tip-giving-wrapper
+    background-color: #fff

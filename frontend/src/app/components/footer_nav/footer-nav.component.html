@@ -1,0 +1,18 @@
+<footer>
+    <div class="footer-link" *ngIf="!userSignedIn()">
+        <a [href]="'https://api.blockpress.com/users/sign_up'" class="text-muted">Sign up</a>
+    </div>
+    <div class="footer-link" *ngIf="!userSignedIn()">
+        <a [href]="'https://api.blockpress.com/users/sign_in'" href=""  class="text-muted">Login</a>
+    </div>
+    <div class="footer-link">
+        <a [href]="'/developers/blockpress-protocol'" class="text-muted">Protocol</a>
+    </div>
+    <div class="footer-link">
+        <a [href]="'/partners'" class="text-muted">Partners</a>
+    </div>
+    <div class="footer-link">
+        <a href="mailto:info@blockpress.com" class="text-muted">Contact</a>
+    </div>
+
+</footer>

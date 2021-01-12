@@ -1,0 +1,60 @@
+
+<div class="tip-giving-container">
+    <div class="like-area">
+        <div class="close-area">
+            <button type="button" class="close" (click)="close.emit($event)" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="like-headline" *ngIf="hasTip" >Like and gift {{ replyingToName | truncate:[20, '...'] }}'s post</div>
+        <div class="like-headline" *ngIf="!hasTip" >Like {{ replyingToName | truncate:[20, '...'] }}'s post</div>
+
+        <a (click)="addTip()" *ngIf="!hasTip" class="add-tip-link">Send a gift with your like</a>
+        <small>
+            <a (click)="removeTip()" *ngIf="hasTip" class="add-tip-link text-muted">Hide gift section</a>
+        </small>
+        <div class="tip-section" *ngIf="hasTip">
+            <label>Gift amount <small>(Minimum 546 to avoid Dust limit)</small></label>
+            <div class="input-group mb-3 tip-amount">
+                <input type="text" (keydown)="updateTipAmount($event)" (keyup)="updateTipAmount($event)" (focus)="updateTipAmount($event)" (focusout)="updateTipAmount($event)" name="tipAmount" class="form-control tip-amount" format="number" [value]="tipAmountInput"/>
+                <div class="input-group-append">
+                    <span class="input-group-text" id="basic-addon2">sats</span>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="hasTip">
+            <button *ngIf="!isValidTipForm()" [attr.disabled]="'disabled'" class="btn btn-success btn-like">
+                <i class="fa fa-heart-o"></i>
+                Like
+            </button>
+            <button *ngIf="isValidTipForm() && !isSubmitting" class="btn btn-success btn-like" (click)="createLikeReplyWithTip($event)">
+                <i class="fa fa-heart-o"></i>
+                Like
+            </button>
+            <button *ngIf="isValidTipForm() && isSubmitting" [attr.disabled]="'disabled'" class="btn btn-success btn-like">
+                <i class="fa fa-clock-o"></i>
+                <i class="fa fa-heart-o"></i>
+                Like
+            </button>
+        </div>
+        <div *ngIf="!hasTip">
+            <button *ngIf="!isSubmitting" class="btn btn-success btn-like" (click)="createLikeReply($event)">
+                <i class="fa fa-heart-o"></i>
+                    Like
+            </button>
+            <button *ngIf="isSubmitting" [attr.disabled]="'disabled'" class="btn btn-success btn-like">
+                <i class="fa fa-clock-o"></i>
+                <i class="fa fa-heart-o"></i>
+                    Like
+            </button>
+        </div>
+        <div class="d-block d-sm-none">
+            <app-alerts-messages
+                [alerts]="alertsList"
+                (deleteAlert)="deleteAlert($event)"
+                [selectKey]="alertSelectKey"
+            ></app-alerts-messages>
+        </div>
+
+    </div>
+</div>

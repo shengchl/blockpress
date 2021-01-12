@@ -1,0 +1,25 @@
+
+<div class="post-stream">
+    <div *ngIf="withHeader" class="notification-type-header">
+        <h5>{{headerTitle}}</h5>
+    </div>
+    <div *ngFor="let post of getPosts">
+        <app-post
+            [session]="session"
+            [post]="post"
+            [workingPostReplies]="workingPostReplies"
+            [profiles]="profiles"
+            [currentUserProfile]="currentUserProfile"
+            [workingPost]="workingPost"
+            [alertsList]="alertsList"
+            [openedTxLikeTips]="openedTxLikeTips"
+        >
+        </app-post>
+    </div>
+    <div  *ngIf="!this.getPosts.length" class="alert alert-secondary">
+        ...
+    </div>
+    <div *ngIf="this.getPosts.length" class="load-more">
+        <button (click)="loadMore()" class="btn btn-secondary btn-load-more">Load more...</button>
+    </div>
+</div>

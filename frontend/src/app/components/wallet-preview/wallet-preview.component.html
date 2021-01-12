@@ -1,0 +1,25 @@
+
+<div class="profile-preview-container">
+    <div class="card" *ngIf="userSignedIn()">
+        <div class="card-body">
+            <h5 class="card-title">
+                <div class="profile-name">
+                    <a (click)="gotoProfile()">
+                        BCH Wallet
+                    </a>
+                </div>
+            </h5>
+            <nav>
+                <div class="profile-earned">
+                   Balance: <strong>{{effectiveBalance()}} </strong> sats
+                </div>
+                <div class="profile-earned">
+                    Earned {{currentUserProfile.tips}} sats
+                </div>
+                <div class="profile-funding">
+                   <button class="btn btn-secondary" (click)="openFundingModal()">Fund Wallet</button>
+                </div>
+            </nav>
+        </div>
+    </div>
+</div>

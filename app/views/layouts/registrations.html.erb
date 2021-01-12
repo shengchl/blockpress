@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <%= render 'layouts/util/og_meta' %>
+  <%= stylesheet_link_tag 'application', media: 'all' %>
+  <%= csrf_meta_tags %>
+  <%= render 'layouts/third_party_trackers/head_codes' %>
+  <%= render 'layouts/util/favicons' %>
+</head>
+<body>
+<main role="main">
+  <br/><br/>
+  <%= render 'layouts/util/messages' %>
+  <%= yield %>
+</main>
+
+<%= include_gon %>
+<%= javascript_include_tag 'application' %>
+<%= render 'layouts/third_party_trackers/body_codes' %>
+</body>
+</html>

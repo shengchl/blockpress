@@ -1,0 +1,6 @@
+<div class="feed-submenu">
+    <a (click)="gotoTop()" class="text-muted" [ngClass]="{'active' : isToday }">Today</a>
+    <a (click)="gotoTopWeek()" class="text-muted" [ngClass]="{'active' : isWeek }">Week</a>
+    <a (click)="gotoTopMonth()" class="text-muted" [ngClass]="{'active' : isMonth }">Month</a>
+    <a (click)="gotoTopAll()" class="text-muted" [ngClass]="{'active' : isAllTime }">All time</a>
+</div>

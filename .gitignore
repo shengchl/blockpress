@@ -1,0 +1,8 @@
+tmp/
+log/
+public/assets/
+.idea/
+.idea/
+.idea/
+.DS_Store
+.vscode

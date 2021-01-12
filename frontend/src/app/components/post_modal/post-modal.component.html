@@ -1,0 +1,53 @@
+
+    <!-- Modal -->
+<div class="post-view modal fade" [id]="postModalId" (click)="modalClicked($event)" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document" (click)="modalInnerClicked($event)">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button (click)="closeModal()" type="button" class="close" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <app-post
+                    [isInsideModal]="true"
+                    [hideActions]="false"
+                    [session]="session"
+                    [post]="post"
+                    [workingPostReplies]="workingPostReplies"
+                    [profiles]="profiles"
+                    [currentUserProfile]="currentUserProfile"
+                    [workingPost]="workingPost"
+                    [alertsList]="alertsList"
+                    [openedTxLikeTips]="openedTxLikeTips"
+                >
+                </app-post>
+                <h4>Replies</h4>
+                <app-publisher
+                    [publisherType]="'reply'"
+                    [publisherTxId]="publisherTxId"
+                    [publishers]="publishers"
+                    [replyToTxId]="replyToPostTxId"
+                    [startCharLimit]="184"
+                    [session]="session"
+                    [workingPost]="workingPost"
+                    [currentUserProfile]="currentUserProfile"
+                    [alertsList]="alertsList"
+                ></app-publisher>
+                <div *ngFor="let p of workingPostReplies">
+                    <app-post
+                        [hideActions]="true"
+                        [session]="session"
+                        [post]="p"
+                        [workingPostReplies]="[]"
+                        [profiles]="profiles"
+                        [currentUserProfile]="currentUserProfile"
+                        [workingPost]="workingPost"
+                        [alertsList]="alertsList"
+                    >
+                    </app-post>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

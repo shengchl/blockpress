@@ -1,0 +1,98 @@
+<div *ngIf="userSignedIn()" class="publisher-container row">
+    <div class="post-wrapper col-12">
+        <div class="publisher-wrapper">
+            <app-alerts-messages
+                [alerts]="alertsList"
+                (deleteAlert)="deleteAlert($event)"
+            ></app-alerts-messages>
+            <div *ngIf="!isPublisherOpen && userSignedIn()" class="publisher-inner collapsed" (click)="expandPoster()">
+            <img class="avatar-img" [src]="currentUserProfileAvatar"/>
+               <div class="publisher-leader">
+                  Share your message here...
+               </div>
+            </div>
+            <div *ngIf="isPublisherOpen" class="publisher-opened">
+                <button (click)="closePoster()" type="button" class="close  publisher-close-btn" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+
+                <div class="publisher-tabs" *ngIf="!disableImagePublish">
+                    <div class="btn-group" role="group" aria-label="First group">
+                        <button (click)="gotoTab('text')"  type="button" class="btn" [ngClass]="isActiveTab('text') ? 'btn-primary' : 'btn-light'">
+                            <i class="fa fa-font"></i>
+                            Text
+                        </button>
+                        <button (click)="gotoTab('image')" type="button" class="btn" [ngClass]="isActiveTab('image') ? 'btn-primary' : 'btn-light'">
+                            <i class="fa fa-photo"></i>
+                            Image
+                        </button>
+                        <button *ngIf="false" (click)="gotoTab('blog')" type="button" class="btn" [ngClass]="isActiveTab('blog') ? 'btn-primary' : 'btn-light'">
+                            <i class="fa fa-pencil"></i>
+                            Blog
+                        </button>
+                    </div>
+                </div>
+                <div class="publisher-tab-contents">
+                    <div *ngIf="isActiveTab('text')" class="publisher-tab-content text">
+                        <textarea name="text" (change)="updateProperty($event)" (focusout)="updateProperty($event)" (keyup)="updateProperty($event)" [id]="publisherIdUnique" class="publisher-body text-input form-control" placeholder="Write your text here...">{{publisherText}}</textarea>
+                    </div>
+                    <div *ngIf="isActiveTab('blog')" class="publisher-tab-content blog">
+                        <input name="title" [value]="publisherTitle" (focusout)="updateProperty($event)"  (change)="updateProperty($event)" (keyup)="updateProperty($event)" id="publisher-titlearea" class="form-control ublisher-body publisher-text-caption-input" placeholder="Title (optional)">
+                        <textarea name="text" (change)="updateProperty($event)" (focusout)="updateProperty($event)" (keyup)="updateProperty($event)" [id]="publisherIdUnique" class="form-control publisher-body blog-input" placeholder="Write your text here...">{{publisherText}}</textarea>
+                    </div>
+                    <div *ngIf="isActiveTab('image') && !disableImagePublish" class="publisher-tab-content photo">
+                        <div class="image-upload-area" *ngIf="!hasActiveBackground">
+                            <div class="image-placeholder">
+                                <img *ngIf="isValidFileChosen()" class="image-upload-file"/>
+                                <button *ngIf="isIpfsEnabled" (change)='selectFile($event)' class="fileUpload btn btn-success upload-btn">
+                                    <i class="fa fa-cloud-upload"></i>
+                                    Upload image
+                                    <input name="chooseFileInput" type="file" class="upload" name="fileInput" value=""/>
+                                </button>
+                                <input class="form-control image-url-input" (focusout)="chooseUrl($event)" placeholder="Paste Image URL (JPG/GIF/PNG)">
+
+                                <button class="btn btn-primary load-image-btn">Load Image from URL</button>
+                            </div>
+                        </div>
+                        <div *ngIf="isActiveTab('image') && hasActiveBackground" [ngStyle]="hasActiveBackground && {'background-image': 'url(' + activeBackground + ')'}" class="image-upload-view">
+                            <button (click)="clearImage()" type="button" class="close publisher-close-btn" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+
+                            <div *ngIf="isMediaUploading" class="alert alert-info media-upload-indicator">
+                                <i class="fa fa-clock-o"></i>
+                                Image media is being uploaded and processed...
+                            </div>
+                        </div>
+                        <textarea name="text" (focusout)="updateProperty($event)"  (change)="updateProperty($event)" (keyup)="updateProperty($event)" id="publisher-textarea" class="form-control publisher-body publisher-text-caption-input" placeholder="Add caption or text here (optional)">{{publisherText}}</textarea>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isPublisherOpen" class="post-controls">
+                <div class="float-left" *ngIf="this.postCommunityName && this.postCommunityName != ''">
+                    <i class="fa fa-users">
+                    </i>
+                    Posting to <strong>b/{{this.postCommunityName}}</strong>
+                    <button class="btn btn-secondary d-none">
+                        <i class="fa fa-photo"></i>
+                    </button>
+                </div>
+                <div class="float-right">
+                    <span class="character-limit-label" [ngClass]="{'overlimit': isOverLimit()}">
+                        {{ charLimit }}
+                    </span>
+                    <button *ngIf="!isValidPost()" class="btn btn-success disabled">
+                        Post
+                    </button>
+                    <button  *ngIf="isValidPost()" class="btn btn-success" (click)="createPost()">
+                        Post
+                    </button>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div *ngIf="isPublisherOpen" class="publisher-bottom-divider">
+
+            </div>
+        </div>
+    </div>
+</div>

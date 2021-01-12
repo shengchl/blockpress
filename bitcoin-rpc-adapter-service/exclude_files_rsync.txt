@@ -1,0 +1,6 @@
+.git
+tmp
+live_tests
+Gemfile.lock
+log
+public/assets/

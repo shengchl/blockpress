@@ -1,0 +1,47 @@
+
+    <!-- Modal -->
+<div class="modal fade" id="viewKeyModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">View/Export Private Key</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        <div class="modal-body">
+            <p>
+                Export your private keys to access your funds in any Bitcoin Cash (BCH) wallet outside of BlockPress.
+            </p>
+            <div *ngIf="isInvalidPassword() && submitted" class="alert alert-danger">
+                Incorrect password. Please try again.
+            </div>
+            <div *ngIf="isSuccess()" class="alert alert-info">
+                <strong>Key (WIF):</strong>
+                <br/> {{ this.exportKeyInfo.wif }}
+            </div>
+            <div *ngIf="isSuccess() && hasPhrase()" class="alert alert-info">
+                <strong>Recovery Phrase:</strong>
+                <br/>
+                {{ this.exportKeyInfo.phrase }}
+            </div>
+            <div *ngIf="isSuccess() && hasPhrase()" class="alert alert-danger">
+                <strong>IMPORTANT:</strong>
+                <br/>
+                Write down and save the key and recovery phrase and store somewhere safe. Anyone with access to either the Key or Recovery Phrase
+                will be able to take all of your Bitcoin Cash funds.
+            </div>
+            <div [ngClass]="{'d-none': isSuccess()}">
+                <div class="form-group">
+                    <label for="passwordInput">Confirm your password for security</label>
+                    <input type="password" (keyup)="update($event)" required class="form-control" id="passwordInput" aria-describedby="exportKey" placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn btn-primary" (click)="exportKey()">Export Key</button>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+        </div>
+    </div>
+</div>

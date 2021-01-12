@@ -1,0 +1,23 @@
+<app-page-communities-view
+  [isCommunityListView]="isCommunityListView"
+  [communityName]="this.communityName"
+  [communities]="communities$ | async"
+
+
+  [shouldLoadIpfsScript]="shouldLoadIpfsScript$ | async"
+  [publishers]="publishers$ | async"
+  [posts]="communityPosts$ | async"
+  [workingPostReplies]="workingPostReplies$ | async"
+  [workingPost]="workingPost$ | async"
+  [session]="session$ | async"
+  [currentUserProfile]="currentUserProfile$ | async"
+  [profiles]="profiles$ | async"
+  [exportKeyInfo]="exportKeyInfo$ | async"
+  [getIsFundingModalOpen]="getIsFundingModalOpen$ | async"
+  [alertsList]="alertsList$ | async"
+  [activeViewingPost]="activeViewingPost$ | async"
+  [modalState]="modalState$ | async"
+  [openedTxLikeTips]="openedTxLikeTips$ | async"
+  [profileSearch]="profileSearch$ | async"
+>
+</app-page-communities-view>

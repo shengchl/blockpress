@@ -1,0 +1,15 @@
+development:
+  facebook_app_id: 1234
+  facebook_app_key: key
+  twitter_app_id: api
+  twitter_app_key: key
+test:
+  facebook_app_id: 1234
+  facebook_app_key: key
+  twitter_app_id: api
+  twitter_app_key: key
+production:
+  facebook_app_id: 1234
+  facebook_app_key: key
+  twitter_app_id: api
+  twitter_app_key: key

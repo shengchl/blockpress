@@ -1,0 +1,100 @@
+<nav class="navbar navbar-light fixed-top navbar-expand-md bg-faded justify-content-center">
+    <a (click)="gotoHome()" class="navbar-brand d-flex mr-auto">
+        <img src="https://i.imgur.com/a9aOQHa.png" class="brand-logo"/>
+        <strong class="brand-name d-none d-sm-block"></strong>
+    </a>
+    <button class="d-block d-sm-block d-md-none btn btn-outline-secondary alert-nav-link"  title="Show newest posts" (click)="gotoHome()">
+        <i class="fa fa-home"></i>
+    </button>
+    <button class="d-block d-sm-block d-md-none btn btn-outline-secondary alert-nav-link"  title="Show completed profiles" (click)="gotoProfiles()">
+        <i class="fa fa-user-plus"></i>
+    </button>
+    <button *ngIf="userSignedIn()" class="d-block d-sm-block d-md-none btn btn-outline-secondary alert-nav-link" (click)="openNotifications()">
+        <i class="fa fa-comments-o"></i>
+    </button>
+    <button *ngIf="userSignedIn()" class="d-block d-sm-block d-md-none  btn btn-outline-secondary wallet-balance-nav-link" (click)="openFundingModal()">
+        <i class="fa fa-bitcoin"></i>
+    </button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbar3">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="navbar-collapse collapse w-100" id="collapsingNavbar3">
+
+         <!--<ul class="navbar-nav w-100 justify-content-center">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//codeply.com">Codeply</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>-->
+        <ul class="nav navbar-nav ml-auto w-100 justify-content-end">
+
+            <li class="nav-item">
+                <button class="btn btn-outline-secondary alert-nav-link"  title="Show newest posts" (click)="gotoHome()">
+                    <i class="fa fa-home"></i>
+                    Home
+                </button>
+            </li>
+
+            <li class="nav-item">
+                <button class="btn btn-outline-secondary alert-nav-link"  title="Explore Communities b/" (click)="gotoCommunities()">
+                    <i class="fa fa-users"></i>
+                    Community
+                </button>
+            </li>
+            <li *ngIf="userSignedIn()" class="nav-item">
+                <button *ngIf="userSignedIn()" class="btn btn-outline-secondary alert-nav-link" title="Show completed profiles" (click)="gotoProfiles()">
+                    <i class="fa fa-user-plus"></i>
+                    Profiles
+                </button>
+            </li>
+            <li *ngIf="userSignedIn()" class="nav-item">
+                <button *ngIf="userSignedIn()" class="btn btn-outline-secondary alert-nav-link" title="Show posts and replies from your followers" (click)="openNotifications()">
+                    <i class="fa fa-comments-o"></i>
+                    Replies
+                </button>
+            </li>
+            <li *ngIf="userSignedIn()" class="nav-item">
+                <button *ngIf="userSignedIn()" class="btn btn-outline-success wallet-balance-nav-link" (click)="openFundingModal()">
+                    <i class="fa fa-bitcoin"></i>
+                    {{ effectiveBalance }}
+                </button>
+            </li>
+
+
+            <li *ngIf="userSignedIn()" class="nav-item dropdown">
+                <a class="navbar-avatar-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <img *ngIf="currentUserProfileAvatar" class="navbar-avatar" [src]="currentUserProfileAvatar"/>
+                    <img *ngIf="!currentUserProfileAvatar" class="navbar-avatar" src="https://s3.amazonaws.com/bpdev/static/profileicon.png"/>
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" (click)="gotoProfile()">Profile</a>
+                    <a class="dropdown-item" data-toggle="modal" data-target="#viewKeyModal">Export Key</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" [href]="logoutUrl">Logout</a>
+                </div>
+            </li>
+            <li  *ngIf="userSignedIn()" class="nav-item">
+                <button class="btn btn-outline-success" (click)="gotoProfile()">Profile</button>
+            </li>
+            <li *ngIf="!userSignedIn()" class="nav-item">
+                <button class="btn btn-outline-success" (click)="gotoSignUp()">Sign up</button>
+            </li>
+            <li *ngIf="!userSignedIn()" class="nav-item">
+                <button class="btn btn-outline-sucdcess" (click)="gotoLogin()">Login</button>
+            </li>
+
+            <li class="nav-item d-none">
+                <a class="nav-link" href="#">
+                    <i class="fa fa-info-circle"></i>
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+</nav>

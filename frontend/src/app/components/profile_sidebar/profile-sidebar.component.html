@@ -1,0 +1,38 @@
+<div class="profile-sidebar">
+    <div *ngIf="!isEditProfile || isConfirmName">
+        <div class="profile-name" [ngClass]="{'confirm-photo-overlay': isEditingProfile && !isConfirmName}">
+            {{ activeProfileName }}
+        </div>
+
+        <div class="profile-address" [title]="profileIdentifier" [ngClass]="{'confirm-photo-overlay': isEditingProfile}">
+            {{ profileIdentifier }}
+        </div>
+
+        <div class="profile-earned" [title]="profileTips" [ngClass]="{'confirm-photo-overlay': isEditingProfile}">
+            {{ profileTips }}
+        </div>
+
+    </div>
+    <div *ngIf="isEditProfile && !isConfirmName && !isConfirmAvatar && !isConfirmPhoto">
+        <div *ngIf="isNameMempool" class="profile-name">
+           <input disabled='disabled'  type="text" class="form-control" [value]="rawProfileName"/>
+           <a [href]="nameTxLink" target="_blank" class="btn btn-success btn-disabled"title="Profile name change is pending in the Mempool. Please wait until transaction is confirmed before updating name again">
+               Set name
+            </a>
+        </div>
+        <div *ngIf="!isNameMempool" class="profile-name">
+           <input (change)="updateProfileName($event)"  maxlength="72" type="text" class="form-control" [value]="rawProfileName"/>
+           <button (click)="setProfileName()" class="btn btn-success">Set name</button>
+        </div>
+
+        <div class="profile-address" [title]="profileIdentifier" [ngClass]="{'confirm-photo-overlay': isEditingProfile}">
+            {{ profileIdentifier }}
+        </div>
+
+        <div class="profile-earned" [title]="profileTips" [ngClass]="{'confirm-photo-overlay': isEditingProfile}" >
+            {{ profileTips }}
+        </div>
+    </div>
+    <div class="profile-bio" id="profile-qr" [ngClass]="{'confirm-photo-overlay': isEditingProfile}">
+    </div>
+</div>
